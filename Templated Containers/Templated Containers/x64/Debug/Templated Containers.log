@@ -1,7 +1,5 @@
 ﻿  main.cpp
-c:\users\s172172\desktop\assessment 2 items - william_hart\templated containers\templated containers\main.cpp(85): error C2228: left of '.push' must have class/struct/union
-  c:\users\s172172\desktop\assessment 2 items - william_hart\templated containers\templated containers\main.cpp(85): note: type is 'linked_list<int> *'
-  c:\users\s172172\desktop\assessment 2 items - william_hart\templated containers\templated containers\main.cpp(85): note: did you intend to use '->' instead?
-c:\users\s172172\desktop\assessment 2 items - william_hart\templated containers\templated containers\main.cpp(85): error C2143: syntax error: missing ';' before '}'
-c:\users\s172172\desktop\assessment 2 items - william_hart\templated containers\templated containers\main.cpp(127): error C3861: 'PrintArray': identifier not found
-c:\users\s172172\desktop\assessment 2 items - william_hart\templated containers\templated containers\main.cpp(112): warning C4390: ';': empty controlled statement found; is this the intent?
+c:\users\s172172\desktop\year 1 aie - assessment 2\templated containers\templated containers\main.cpp(161): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+c:\users\s172172\desktop\year 1 aie - assessment 2\templated containers\templated containers\main.cpp(122): warning C4390: ';': empty controlled statement found; is this the intent?
+c:\users\s172172\desktop\year 1 aie - assessment 2\templated containers\templated containers\main.cpp(216): warning C4102: 'exit': unreferenced label
+  Templated Containers.vcxproj -> C:\Users\s172172\Desktop\Year 1 AIE - Assessment 2\Templated Containers\x64\Debug\Templated Containers.exe

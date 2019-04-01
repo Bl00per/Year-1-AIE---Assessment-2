@@ -3,10 +3,16 @@
 #include "linked_list.h"
 #include <crtdbg.h>
 
+void clearInput() {
+	std::cin.clear();
+	std::cin.ignore(SHRT_MAX, '\n');
+}
 
 int main() {
 	// Check for memory leaks
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+	system("title Templated Containers");
 
 	// Assign the vectors for dynamic array and linked list
 	dynamic_array<int> my_array;
@@ -32,9 +38,10 @@ int main() {
 
 	while (!is_valid)
 	{
-		int userInput = 0;
-		int userInput_linked = 0;
-		int userInput_dynamic = 0;
+		int menuInput;
+		int userInput_linked;
+		int userInput_dynamic;
+		int Input;
 	
 	start:
 		std::cout << "Which container class would you like to test?\n"
@@ -42,22 +49,18 @@ int main() {
 			"[2] - Dynamic Array class\n"
 			"[3] - Exit\n"
 			"\nInput: ";
-		std::cin >> userInput;
+		std::cin >> menuInput;
+		clearInput();
 
 	linked_list_menu:
-		if (userInput == 1)
+		if (menuInput == 1)
 		{
+			is_valid = true;
 			system("cls");
 			std::cout << "Select option:\n[1] - View array\n"
-				"[2] - Add to end of array\n"
-				"[3] - Remove from end of array\n"
-				"[4] - Add 1 or more elements to array\n"
-				"[5] - Remove elements from array\n"
-				"[6] - Display amount of values in array\n"
-				"[7] - Display capacity of array\n"
-				"[8] - Return to start\n"
 				"\nInput: ";
 			std::cin >> userInput_linked;
+			clearInput();
 
 			if (userInput_linked == 1)
 			{
@@ -76,12 +79,11 @@ int main() {
 
 			if (userInput_linked == 2)
 			{
-				int Input2 = 0;
-
 				system("cls");
 				std::cout << "Please enter the value you would like to add: ";
-				std::cin >> Input2;
-				my_list.pushBack(Input2);
+				std::cin >> Input;
+				clearInput();
+				my_list->pushBack(Input);
 			}
 
 			if (userInput_linked == 3)
@@ -108,9 +110,18 @@ int main() {
 			{
 
 			}
+
+			if (userInput_linked == 8)
+			{
+				system("cls");
+				goto start;
+			}
 		}
-		else if (userInput == 2);
+
+	dynamic_array_menu:
+		if (menuInput == 2);
 		{
+			is_valid = true;
 			system("cls");
 			std::cout << "Select option:\n[1] - View array\n"
 				"[2] - Add to end of array\n"
@@ -121,36 +132,94 @@ int main() {
 				"[7] - Display capacity of array\n"
 				"[8] - Return to start\n"
 				"\nInput: ";
+			std::cin >> userInput_dynamic;
+			clearInput();
 
 			if (userInput_dynamic == 1)
 			{
-				PrintArray();
+				system("cls");
+				my_array.printArray();
+				
+				system("Pause");
+				goto dynamic_array_menu;
 			}
+			else if (userInput_dynamic == 2)
+			{
+				system("cls");
+				std::cout << "Please enter the value you would like to add: ";
+				std::cin >> Input;
+				clearInput();
+				my_array.push(Input);
+
+				std::cout << '\n';
+				system("Pause");
+				goto dynamic_array_menu;
+			}
+			else if (userInput_dynamic == 3)
+			{
+				system("cls");
+				std::cout << "Removed value: " << my_array[my_array.count() - 1] << std::endl;
+				my_array.pop();
+
+				system("Pause");
+				goto dynamic_array_menu;
+			}
+			
+			else if (userInput_dynamic == 4)
+			{
+				int elementCount = 1;
+				int Index = 0;
+
+				system("cls");
+				std::cout << "Please enter the value you would like to insert: ";
+				std::cin >> Input;
+				clearInput();
+				std::cout << "How many of the values would you like to insert (default = 1): ";
+				std::cin >> elementCount;
+				clearInput();
+				std::cout << "At what index would you like to put the values: ";
+				std::cin >> Index;
+				clearInput();
+
+				dynamic_array<int> insert_array;
+				for (int i = 0; i < elementCount; i++)
+				{
+					insert_array.push(Input);
+				}
+				my_array.insert(insert_array, Index);
+
+				std::cout << '\n';
+				system("Pause");
+				goto dynamic_array_menu;
+			}
+
+
+
+
+			else if (userInput_dynamic == 7)
+			{
+				system("cls");
+				std::cout << "The capacity of the array is currently: " << my_array.capacity();
+				
+				std::cout << '\n';
+				system("Pause");
+				goto dynamic_array_menu;
+			}
+
+			else if (userInput_dynamic == 8)
+			{
+				system("cls");
+				goto start;
+			}
+		}
+
+	exit:
+		if (menuInput == 3)
+		{
+			
 		}
 	}
 
-
-
-
-
-
-	my_list->pushFront(50);
-	// This value is going to the be the first one
-	// because it was called last
-	my_list->pushFront(123);
-
-	// Inserts the value 500 at index 3
-	my_list->insert(500, 3);
-
-	my_list->remove(5);
-
-	std::cout << "First element: " << my_list->first() << std::endl;
-	std::cout << "Last element: " << my_list->last() << std::endl;
-
-	std::cout << "Amount of elements: " << my_list->count() << std::endl;
-
-
-	system("Pause");
 	return 0;
 }
 

@@ -94,8 +94,11 @@ public:
 	*/
 	void grow()
 	{
+		while (m_count >= m_capacity)
+		{
+			m_capacity *= 2; // Doubling capacity when needed
+		}
 		// Increase size of array
-		m_capacity *= 2; // Doubling capacity when needed
 		T* new_location = new T[m_capacity]; // New temp. storage
 		for (size_t i = 0; i < m_count; i++) // Deep copy to new storage
 		{
@@ -105,16 +108,14 @@ public:
 		m_data = new_location;				 // Point at new storage
 	}
 
-	void insert(dynamic_array<T>& a_data, size_t a_elemen_count, size_t a_index)
-	{
-		insert(a_data.m_data, a_data.m_count, a_index);
-	}
+
 
 	// 1 or more elements or type t
 	void insert(const T* a_data, size_t a_elemen_count, size_t a_index)
 	{
+		m_count += a_elemen_count;
 		// Check capacity for insertion of 1 element
-		while (m_count + a_elemen_count >= m_capacity)
+		if (m_count >= m_capacity)
 		{
 			grow();
 		}
@@ -126,10 +127,15 @@ public:
 		}
 		// Copy insertion from array
 		size_t j = 0;
-		for (size_t i = a_index; i < a_index; i++, j++)
+		for (size_t i = a_index; i < a_index + a_elemen_count; i++, j++)
 		{
 			m_data[i] = a_data[j]; // Insert from array
 		}
+	}
+
+	void insert(dynamic_array<T>& a_data, size_t a_index)
+	{
+		insert(a_data.m_data, a_data.m_count, a_index);
 	}
 
 	// Remove element from the array
@@ -168,11 +174,11 @@ public:
 		m_count = 0;
 	}
 
-	void PrintArray()
+	void printArray()
 	{
 		for (int i = 0; i < m_count; i++)
 		{
-			std::cout << m_data[i] << ", ";
+			std::cout << m_data[i] << std::endl;
 		}
 		std::cout << '\n';
 	}
