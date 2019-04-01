@@ -1,0 +1,7 @@
+﻿  main.cpp
+c:\users\s172172\desktop\assessment 2 items - william_hart\templated containers\templated containers\main.cpp(85): error C2228: left of '.push' must have class/struct/union
+  c:\users\s172172\desktop\assessment 2 items - william_hart\templated containers\templated containers\main.cpp(85): note: type is 'linked_list<int> *'
+  c:\users\s172172\desktop\assessment 2 items - william_hart\templated containers\templated containers\main.cpp(85): note: did you intend to use '->' instead?
+c:\users\s172172\desktop\assessment 2 items - william_hart\templated containers\templated containers\main.cpp(85): error C2143: syntax error: missing ';' before '}'
+c:\users\s172172\desktop\assessment 2 items - william_hart\templated containers\templated containers\main.cpp(127): error C3861: 'PrintArray': identifier not found
+c:\users\s172172\desktop\assessment 2 items - william_hart\templated containers\templated containers\main.cpp(112): warning C4390: ';': empty controlled statement found; is this the intent?
