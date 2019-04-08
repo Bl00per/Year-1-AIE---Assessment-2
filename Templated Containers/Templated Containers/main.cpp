@@ -4,15 +4,17 @@
 #include <crtdbg.h>
 #include <Windows.h>
 
+
+linked_list<int> *my_list = nullptr;
+
 void clearInput() {
 	std::cin.clear();
 	std::cin.ignore(std::cin.rdbuf()->in_avail());
 }
 
 void main_menu_funct();
-void dynamic_array_funct(dynamic_array<int> my_array);
+void dynamic_array_funct(dynamic_array<int>& my_array);
 void linked_list_funct(linked_list<int> *my_list);
-
 
 int main() {
 	// Check for memory leaks
@@ -23,6 +25,7 @@ int main() {
 	//main_menu_funct(my_array);
 	main_menu_funct();
 
+	delete my_list;
 	return 0;
 }
 
@@ -51,7 +54,12 @@ void main_menu_funct()
 		else if (menuInput == 1)
 		{
 			// Assigned vector for linked list
-			linked_list<int> *my_list = new linked_list<int>();
+			if (my_list)
+			{
+				delete my_list;
+			}
+
+			my_list = new linked_list<int>();
 
 			// Pushing default values for linked list
 			my_list->pushBack(100);
@@ -60,7 +68,6 @@ void main_menu_funct()
 			my_list->pushBack(600);
 			my_list->pushBack(800);
 			my_list->pushBack(1000);
-			my_list->insert(10, 5);
 
 			linked_list_funct(my_list);
 		}
@@ -95,7 +102,7 @@ void main_menu_funct()
 	}
 }
 
-void dynamic_array_funct(dynamic_array<int> my_array)
+void dynamic_array_funct(dynamic_array<int>& my_array)
 {
 	int Input;
 	int userInput_dynamic;
@@ -206,7 +213,8 @@ void dynamic_array_funct(dynamic_array<int> my_array)
 
 	else if (userInput_dynamic == 8)
 	{
-		main_menu_funct();
+		my_array.clear();
+		clearInput();
 	}
 
 	else
@@ -269,7 +277,7 @@ void linked_list_funct(linked_list<int> *my_list)
 		std::cout << "Please enter the value you would like to add to the FRONT of the list: ";
 		std::cin >> Input;
 		clearInput();
-		my_list->pushBack(Input);
+		my_list->pushFront(Input);
 		linked_list_funct(my_list);
 	}
 
@@ -431,7 +439,12 @@ void linked_list_funct(linked_list<int> *my_list)
 
 	else if (userInput_linked == 16)
 	{
-		main_menu_funct();
+		my_list->clear();
+		for (int i = 0; i < my_list->count(); i++)
+		{
+			my_list->remove(i);
+		}
+		clearInput();
 	}
 
 	else
