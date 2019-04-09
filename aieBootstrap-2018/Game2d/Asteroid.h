@@ -16,8 +16,16 @@ protected:
 	aie::Texture*		m_asteroid;
 	float positionX = 650;
 	float positionY = 500;
-	float rotation = 0; //degrees
 
+	//degrees
+	float rotation_sml = 0; 
+	float rotation_med = 0;
+	float rotation_lrg = 0;
+
+	// 0 = right, 1 = left
+	int asteroidRotation_sml = 0; 
+	int asteroidRotation_med = 0; 
+	int asteroidRotation_lrg = 0; 
 
 	int screenWidth = 1280;
 	int screenHeight = 720;

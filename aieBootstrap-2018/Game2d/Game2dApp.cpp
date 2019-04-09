@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include "Font.h"
 #include "Input.h"
+#include <ctime>
 
 Game2dApp::Game2dApp() {
 
@@ -13,6 +14,7 @@ Game2dApp::~Game2dApp() {
 
 bool Game2dApp::startup() {
 	
+	srand(time(NULL));
 	m_2dRenderer = new aie::Renderer2D();
 
 	mainCharacter = new Player();

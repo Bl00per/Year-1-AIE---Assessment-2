@@ -19,55 +19,39 @@ void Player::update(float deltaTime) {
 	aie::Input* input = aie::Input::getInstance();
 
 	if (input->isKeyDown(aie::INPUT_KEY_UP) && input->isKeyDown(aie::INPUT_KEY_RIGHT)) {
-		positionY += 500.0f * deltaTime;
-		positionX += 500.0f * deltaTime;
-		rotation = 7 * PI / 4;
-		direction = 1;
+		positionY += 450.0f * deltaTime;
+		positionX += 450.0f * deltaTime;
 	}
 
 	else if (input->isKeyDown(aie::INPUT_KEY_UP) && input->isKeyDown(aie::INPUT_KEY_LEFT)) {
-		positionY += 500.0f * deltaTime;
-		positionX -= 500.0f * deltaTime;
-		rotation = PI / 4;
-		direction = 7;
+		positionY += 450.0f * deltaTime;
+		positionX -= 450.0f * deltaTime;
 	}
 
 	else if (input->isKeyDown(aie::INPUT_KEY_DOWN) && input->isKeyDown(aie::INPUT_KEY_RIGHT)) {
-		positionY -= 500.0f * deltaTime;
-		positionX += 500.0f * deltaTime;
-		rotation =   5 * PI / 4;
-		direction = 3;
+		positionY -= 400.0f * deltaTime;
+		positionX += 400.0f * deltaTime;
 	}
 
 	else if (input->isKeyDown(aie::INPUT_KEY_DOWN) && input->isKeyDown(aie::INPUT_KEY_LEFT)) {
-		positionY -= 500.0f * deltaTime;
-		positionX -= 500.0f * deltaTime;
-		rotation = 3 * PI / 4;
-		direction = 5;
+		positionY -= 400.0f * deltaTime;
+		positionX -= 400.0f * deltaTime;
 	}
 
 	else if (input->isKeyDown(aie::INPUT_KEY_UP)) {
 		positionY += 500.0f * deltaTime;
-		rotation = 0;
-		direction = 0;
 	}
 
 	else if (input->isKeyDown(aie::INPUT_KEY_DOWN)) {
-		positionY -= 500.0f * deltaTime;
-		rotation = PI;
-		direction = 4;
+		positionY -= 300.0f * deltaTime;
 	}
 
 	else if (input->isKeyDown(aie::INPUT_KEY_LEFT)) {
 		positionX -= 500.0f * deltaTime;
-		rotation = PI / 2;
-		direction = 6;
 	}
 
 	else if (input->isKeyDown(aie::INPUT_KEY_RIGHT)) {
 		positionX += 500.0f * deltaTime;
-		rotation = -PI / 2;
-		direction = 2;
 	}
 
 	// Screen Boundry
@@ -94,6 +78,7 @@ void Player::update(float deltaTime) {
 		ammo_count--;
 	}
 	
+	// If user is reloading, make the animation reverse until it reaches the first sprite
 	if (is_reloading) {
 		down_sprite--;
 		if (down_sprite == 0)
