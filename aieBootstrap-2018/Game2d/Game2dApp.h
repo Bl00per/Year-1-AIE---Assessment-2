@@ -3,7 +3,9 @@
 #include "Application.h"
 #include "Renderer2D.h"
 #include "Player.h"
-#include "Asteroid.h"
+#include "Asteroid_small.h"
+#include "Asteroid_medium.h"
+#include "Asteroid_large.h"
 
 
 class Game2dApp : public aie::Application {
@@ -25,6 +27,8 @@ protected:
 	aie::Texture*		m_ammo;
 
 	Player *mainCharacter;
-	Asteroid *enemyAsteroid;
+	Asteroid_small *asteroidSmall;
+	Asteroid_medium *asteroidMedium;
+	Asteroid_large *asteroidLarge;
 
 };

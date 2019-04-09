@@ -19,7 +19,9 @@ bool Game2dApp::startup() {
 
 	mainCharacter = new Player();
 
-	enemyAsteroid = new Asteroid();
+	asteroidSmall = new Asteroid_small();
+	asteroidMedium = new Asteroid_medium();
+	asteroidLarge = new Asteroid_large();
 
 	// TODO: remember to change this when redistributing a build!
 	// the following path would be used instead: "./font/consolas.ttf"
@@ -40,7 +42,9 @@ void Game2dApp::update(float deltaTime) {
 
 	mainCharacter->update(deltaTime);
 
-	enemyAsteroid->update(deltaTime);
+	asteroidSmall->update(deltaTime);
+	asteroidMedium->update(deltaTime);
+	asteroidLarge->update(deltaTime);
 
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
@@ -59,7 +63,9 @@ void Game2dApp::draw() {
 	// draw your stuff here!
 	mainCharacter->draw(m_2dRenderer);
 
-	enemyAsteroid->draw(m_2dRenderer);
+	asteroidSmall->draw(m_2dRenderer);
+	asteroidMedium->draw(m_2dRenderer);
+	asteroidLarge->draw(m_2dRenderer);
 	
 	// output some text, uses the last used colour
 	m_2dRenderer->drawText(m_font, "Press ESC to quit", 8, 10);
