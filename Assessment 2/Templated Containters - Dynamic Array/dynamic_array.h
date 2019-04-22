@@ -111,7 +111,7 @@ public:
 
 
 	// 1 or more elements or type t
-	void insert(const T* a_data, size_t a_elemen_count, size_t a_index)
+	void insert(const T* a_data, T a_elemen_count, size_t a_index)
 	{
 		m_count += a_elemen_count;
 		// Check capacity for insertion of 1 element
@@ -139,7 +139,7 @@ public:
 	}
 
 	// Remove element from the array
-	void remove(size_t a_index, size_t a_count = 1)
+	void remove(size_t a_index, T a_count = 1)
 	{
 		for (size_t i = a_index; i + a_count < m_count; i++)
 		{
@@ -195,7 +195,7 @@ public:
 	}
 
 	// Return the number of values in the array
-	size_t count() const
+	T count() const
 	{
 		return m_count;
 	}
@@ -211,7 +211,7 @@ private:
 	T* m_data = nullptr;
 
 	// Store current length
-	size_t m_count = 0; // Count = length
+	T m_count = 0; // Count = length
 
 	// Store current capacity
 	size_t m_capacity = 0;

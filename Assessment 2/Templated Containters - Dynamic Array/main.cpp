@@ -9,8 +9,6 @@ void clearInput() {
 	std::cin.ignore(std::cin.rdbuf()->in_avail());
 }
 
-void dynamic_array_funct(dynamic_array<int>& my_array);
-
 int main() {
 	// Check for memory leaks
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
