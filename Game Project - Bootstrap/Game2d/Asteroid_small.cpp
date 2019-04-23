@@ -55,5 +55,5 @@ void Asteroid_small::draw(aie::Renderer2D* m_2dRenderer) {
 	m_2dRenderer->setUVRect(0, 0, 1.0f, 1.0f);
 
 	// Small sized
-	m_2dRenderer->drawSprite(m_asteroid, positionX, tan(m_timer * 1) * -100 + 720, 0, 0, rotation_sml, 0.9);
+	m_2dRenderer->drawSprite(m_asteroid, positionX, tan(m_timer * 1) * -100 + 720, 0, 0, rotation_sml, 0.8);
 }

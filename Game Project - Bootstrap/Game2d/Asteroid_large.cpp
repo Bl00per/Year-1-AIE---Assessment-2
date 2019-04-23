@@ -55,5 +55,5 @@ void Asteroid_large::draw(aie::Renderer2D* m_2dRenderer) {
 	m_2dRenderer->setUVRect(0, 0, 1.0f, 1.0f);
 
 	// Large sized
-	m_2dRenderer->drawSprite(m_asteroid, positionX, tan(m_timer * 3) * -100 + 720, 192, 208, rotation_lrg, 0.9);
+	m_2dRenderer->drawSprite(m_asteroid, positionX, tan(m_timer * 3) * -100 + 720, 192, 208, rotation_lrg, 0.8);
 }

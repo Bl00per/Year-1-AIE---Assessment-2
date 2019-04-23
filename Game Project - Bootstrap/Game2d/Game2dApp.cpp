@@ -68,8 +68,9 @@ void Game2dApp::draw() {
 	asteroidLarge->draw(m_2dRenderer);
 	
 	// output some text, uses the last used colour
-	m_2dRenderer->drawText(m_font, "Press ESC to quit", 8, 10);
+	m_2dRenderer->drawText(m_font, "Press ESC to quit", 8, 10, 1);
 
 	// done drawing sprites
 	m_2dRenderer->end();
 }
+

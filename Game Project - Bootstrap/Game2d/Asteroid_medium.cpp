@@ -27,7 +27,7 @@ void Asteroid_medium::update(float deltaTime) {
 	else if (asteroidRotation_med == 3)
 		rotation_med -= deltaTime;
 
-
+	
 
 
 
@@ -55,5 +55,5 @@ void Asteroid_medium::draw(aie::Renderer2D* m_2dRenderer) {
 	m_2dRenderer->setUVRect(0, 0, 1.0f, 1.0f);
 
 	// Medium sized
-	m_2dRenderer->drawSprite(m_asteroid, positionX, tan(m_timer * 2) * -100 + 720, 96, 104, rotation_med, 0.9);
+	m_2dRenderer->drawSprite(m_asteroid, positionX, tan(m_timer * 2) * -100 + 720, 96, 104, rotation_med, 0.8);
 }

@@ -36,6 +36,9 @@
     <ClCompile Include="Asteroid_small.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AsteroidManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game2dApp.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Asteroid_small.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AsteroidManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

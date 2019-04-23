@@ -110,7 +110,7 @@ void Player::draw(aie::Renderer2D*	m_2dRenderer) {
 
 	// demonstrate animation			Across				Down	Where across/Where down
 	m_2dRenderer->setUVRect((float)across_sprite / 1.0f, (float)down_sprite / 11.0f, 1.0f / 1.0f, 1.0 / 11.0f);
-	m_2dRenderer->drawSprite(m_ammo, 1026, 45, 500, 78);
+	m_2dRenderer->drawSprite(m_ammo, 1026, 45, 500, 78, 0, 1);
 
 
 	// Position and draw the ship
