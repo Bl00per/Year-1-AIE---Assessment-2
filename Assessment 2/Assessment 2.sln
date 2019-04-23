@@ -7,7 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Templated Containters - Dyn
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Templated Containters - Linked List", "Templated Containters - Linked List\Templated Containters - Linked List.vcxproj", "{BCCD970A-C85E-4E77-82BD-5346F3F78C67}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Searching and Sorting - Sorting", "Searching and Sorting - Sorting\Searching and Sorting - Sorting.vcxproj", "{FF93A5DD-4FF6-4875-B143-6A5EDBE1F1E6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Searching and Sorting", "Searching and Sorting\Searching and Sorting.vcxproj", "{FF93A5DD-4FF6-4875-B143-6A5EDBE1F1E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

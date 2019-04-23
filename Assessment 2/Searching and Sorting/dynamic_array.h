@@ -218,6 +218,18 @@ public:
 		return;
 	}
 
+	int linearSearch(const T& a_data)
+	{
+		for (int i = 0; i < m_count; i++)
+		{
+			if (m_data[i] == a_data)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+
 	// Access array element by index
 	T& operator[] (const int index)
 	{

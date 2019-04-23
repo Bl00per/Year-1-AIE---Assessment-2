@@ -38,7 +38,8 @@ int main() {
 			"[2] - Add to end of array\n"
 			"[3] - Remove from end of array\n"
 			"[4] - Sort the array\n"
-			"[5] - Exit\n"
+			"[5] - Search for value\n"
+			"[6] - Exit\n"
 			"\nInput: ";
 		std::cin >> userInput_dynamic;
 		clearInput();
@@ -76,7 +77,7 @@ int main() {
 		else if (userInput_dynamic == 4)
 		{
 			system("cls");
-			std::cout << "Array Sorted." << '\n';
+			std::cout << "Array Sorted.\n";
 			my_array.selectionSort(my_array);
 
 			std::cout << '\n';
@@ -86,6 +87,26 @@ int main() {
 
 		else if (userInput_dynamic == 5)
 		{
+			system("cls");
+			std::cout << "Please enter the value you would like to search for: ";
+			std::cin >> Input;
+			int returnValue = my_array.linearSearch(Input);
+			if (returnValue == -1)
+			{
+				std::cout << "The value could not be found.\n";
+			}
+			else
+			{
+				std::cout << "The value " << Input << " was found at index: " << returnValue << '\n';
+			}
+
+			std::cout << '\n';
+			system("Pause");
+			goto start;
+		}
+
+		else if (userInput_dynamic == 6)
+		{
 			is_valid = true;
 			my_array.deleteData();
 
@@ -94,6 +115,7 @@ int main() {
 			Sleep(300);
 			exit(0);
 		}
+
 
 		else
 		{
