@@ -37,12 +37,8 @@ int main() {
 		std::cout << "Select option:\n[1] - View array\n"
 			"[2] - Add to end of array\n"
 			"[3] - Remove from end of array\n"
-			"[4] - Add 1 or more elements to array\n"
-			"[5] - Remove elements from array\n"
-			"[6] - Display amount of values in array\n"
-			"[7] - Display capacity of array\n"
-			""
-			"[9] - Exit\n"
+			"[4] - Sort the array\n"
+			"[5] - Exit\n"
 			"\nInput: ";
 		std::cin >> userInput_dynamic;
 		clearInput();
@@ -79,26 +75,9 @@ int main() {
 
 		else if (userInput_dynamic == 4)
 		{
-			int elementCount = 1;
-			int Index = 0;
-
 			system("cls");
-			std::cout << "Please enter the value you would like to insert: ";
-			std::cin >> Input;
-			clearInput();
-			std::cout << "How many of the values would you like to insert (default = 1): ";
-			std::cin >> elementCount;
-			clearInput();
-			std::cout << "At what index would you like to put the values: ";
-			std::cin >> Index;
-			clearInput();
-
-			dynamic_array<int> insert_array;
-			for (int i = 0; i < elementCount; i++)
-			{
-				insert_array.push(Input);
-			}
-			my_array.insert(insert_array, Index);
+			std::cout << "Array Sorted." << '\n';
+			my_array.selectionSort(my_array);
 
 			std::cout << '\n';
 			system("Pause");
@@ -106,39 +85,6 @@ int main() {
 		}
 
 		else if (userInput_dynamic == 5)
-		{
-			system("cls");
-			std::cout << "Please enter the index you would like to remove: ";
-			std::cin >> Input;
-			clearInput();
-			my_array.remove(Input);
-
-			std::cout << '\n';
-			system("Pause");
-			goto start;
-		}
-
-		else if (userInput_dynamic == 6)
-		{
-			system("cls");
-			std::cout << "There are " << my_array.count() << " values in the array\n";
-
-			std::cout << '\n';
-			system("Pause");
-			goto start;
-		}
-
-		else if (userInput_dynamic == 7)
-		{
-			system("cls");
-			std::cout << "The capacity of the array is currently: " << my_array.capacity() << '\n';
-
-			std::cout << '\n';
-			system("Pause");
-			goto start;
-		}
-
-		else if (userInput_dynamic == 8)
 		{
 			is_valid = true;
 			my_array.deleteData();
