@@ -1,2 +1,10 @@
 ﻿  main.cpp
+c:\users\s172172\desktop\year 1 aie - assessment 2\assessment 2\templated containters - dynamic array\dynamic_array.h(15): warning C4267: '=': conversion from 'size_t' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+  c:\users\s172172\desktop\year 1 aie - assessment 2\assessment 2\templated containters - dynamic array\dynamic_array.h(12): note: while compiling class template member function 'dynamic_array<int>::dynamic_array(void)'
+  c:\users\s172172\desktop\year 1 aie - assessment 2\assessment 2\templated containters - dynamic array\main.cpp(18): note: see reference to function template instantiation 'dynamic_array<int>::dynamic_array(void)' being compiled
+  c:\users\s172172\desktop\year 1 aie - assessment 2\assessment 2\templated containters - dynamic array\main.cpp(18): note: see reference to class template instantiation 'dynamic_array<int>' being compiled
   Templated Containters - Dynamic Array.vcxproj -> C:\Users\s172172\Desktop\Year 1 AIE - Assessment 2\Assessment 2\x64\Debug\Templated Containters - Dynamic Array.exe

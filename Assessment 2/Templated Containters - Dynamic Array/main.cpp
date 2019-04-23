@@ -25,6 +25,7 @@ int main() {
 	my_array.push(50);
 	my_array.push(100);
 
+
 	int Input;
 	int userInput_dynamic;
 	bool is_valid = false;
@@ -40,7 +41,8 @@ int main() {
 			"[5] - Remove elements from array\n"
 			"[6] - Display amount of values in array\n"
 			"[7] - Display capacity of array\n"
-			"[8] - Exit\n"
+			""
+			"[9] - Exit\n"
 			"\nInput: ";
 		std::cin >> userInput_dynamic;
 		clearInput();
@@ -137,6 +139,17 @@ int main() {
 		}
 
 		else if (userInput_dynamic == 8)
+		{
+			system("cls");
+			std::cout << "Array Sorted." << '\n';
+			my_array.selectionSort(my_array);
+
+			std::cout << '\n';
+			system("Pause");
+			goto start;
+		}
+
+		else if (userInput_dynamic == 9)
 		{
 			is_valid = true;
 			my_array.deleteData();

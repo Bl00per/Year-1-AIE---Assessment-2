@@ -111,17 +111,28 @@ public:
 
 
 	// 1 or more elements or type t
-	void insert(const T* a_data, T a_elemen_count, size_t a_index)
+	void insert(const T* a_data, T a_elemen_count, int a_index)
 	{
+		if (a_index >= m_capacity)
+		{
+			a_index = m_count;
+		}
+		else if (a_index < 0)
+		{
+			a_index = 0;
+		}
+
 		m_count += a_elemen_count;
 		// Check capacity for insertion of 1 element
+
 		if (m_count >= m_capacity)
 		{
 			grow();
 		}
 
+
 		// Move the data over
-		for (size_t i = m_count - 1; i >= a_index; i--)
+		for (int i = m_count - 1; i >= a_index; i--)
 		{
 			m_data[i + a_elemen_count] = m_data[i];
 		}
@@ -133,7 +144,7 @@ public:
 		}
 	}
 
-	void insert(dynamic_array<T>& a_data, size_t a_index)
+	void insert(dynamic_array<T>& a_data, int a_index)
 	{
 		insert(a_data.m_data, a_data.m_count, a_index);
 	}
@@ -188,6 +199,25 @@ public:
 		std::cout << '\n';
 	}
 
+	void selectionSort(dynamic_array<T>& a_data)
+	{
+		int i, j, first, temp;
+		int numLength = count();
+		for (i = numLength - 1; i > 0; i--) // Go through and search the array
+		{
+			first = 0;                 // initialize to subscript of first element
+			for (j = 1; j <= i; j++)   // locate smallest between positions 1 and i.
+			{
+				if (m_data[j] > m_data[first])
+					first = j;
+			}
+			temp = m_data[first];   // Swap smallest found with element in position i.
+			m_data[first] = m_data[i];
+			m_data[i] = temp;
+		}
+		return;
+	}
+
 	// Access array element by index
 	T& operator[] (const int index)
 	{
@@ -195,13 +225,13 @@ public:
 	}
 
 	// Return the number of values in the array
-	T count() const
+	int count() const
 	{
 		return m_count;
 	}
 
 	// Return the current capacity of the array
-	size_t capacity() const
+	int capacity() const
 	{
 		return m_capacity;
 	}
@@ -214,7 +244,7 @@ private:
 	T m_count = 0; // Count = length
 
 	// Store current capacity
-	size_t m_capacity = 0;
+	T m_capacity = 0;
 
 	// Default capacity for default storage
 	const size_t m_default_capacity = 8;
