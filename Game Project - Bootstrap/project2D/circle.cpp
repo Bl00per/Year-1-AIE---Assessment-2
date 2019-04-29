@@ -5,10 +5,11 @@
 
 
 
-circle::circle()
+circle::circle(float m_circlePosX, float m_circlePosY)
 {
 	srand(time(NULL));
-	circlePosX = rand() % getWindowWidth() + 0;
+	circlePosX = m_circlePosX;
+	circlePosY = m_circlePosY;
 }
 
 
@@ -19,10 +20,11 @@ circle::~circle()
 
 void circle::update(float deltaTime)
 {
-
+	m_timer += deltaTime;
 }
 
-void circle::draw()
+void circle::draw(aie::Renderer2D*	m_2dRenderer)
 {
-
+	m_2dRenderer->setRenderColour(1, 0, 0.25, 1);
+	m_2dRenderer->drawCircle(circlePosX, circlePosY, 10.0f);
 }

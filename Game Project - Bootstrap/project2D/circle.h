@@ -9,16 +9,20 @@ class circle
 {
 public:
 	circle();
+	circle(float m_circlepositionX, float m_circlepositionY);
 
 	~circle();
 
 
 	void update(float deltaTime);
-	void draw();
+	void draw(aie::Renderer2D*	m_2dRenderer);
 
 private:
-	int circlePosX = 0;
-	int circlePosY = 0;
+	aie::Renderer2D*	m_2dRenderer;
+	float m_timer;
+
+	float circlePosX = 0;
+	float circlePosY = 0;
 	float m_raidus = 0.0f;
 
 };

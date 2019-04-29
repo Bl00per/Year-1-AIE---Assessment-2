@@ -22,6 +22,10 @@ bool Application2D::startup() {
 	m_timer = 0;
 	sprite_timer = 0;
 
+
+	objectPosX = rand() % 1280 + 0;
+	objectPosY = rand() % 720 + 0;
+
 	return true;
 }
 
@@ -43,7 +47,16 @@ void Application2D::update(float deltaTime) {
 
 	std::cout << "The current mouse position is: " << mousePosX << "/" << mousePosY << std::endl;
 
+	for (int i = 0; i < circle_array.count(); i++)
+	{
+		circle_array[i].update(deltaTime);
+	}
 
+	if (m_timer >= 1.0f)
+	{
+		circle_array.push(circle(objectPosX, objectPosY));
+		m_timer = 0;
+	}
 
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
@@ -80,8 +93,10 @@ void Application2D::draw() {
 
 	m_2dRenderer->setUVRect(0, 0, 1.0f, 1.0f);
 
-	m_2dRenderer->setRenderColour(1, 0, 0.25, 1);
-	m_2dRenderer->drawCircle(objectPosX, objectPosY, 10.0f);
+	for (int i = 0; i < circle_array.count(); i++)
+	{
+		circle_array[i].draw(m_2dRenderer);
+	}
 	
 	// output some text, uses the last used colour
 	char fps[32];

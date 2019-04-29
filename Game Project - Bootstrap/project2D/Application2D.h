@@ -2,7 +2,10 @@
 
 #include "Application.h"
 #include "Renderer2D.h"
+#include "circle.h"
+#include "dynamic_array.h"
 #include <Windows.h>
+#include <vector>
 
 class Application2D : public aie::Application {
 public:
@@ -16,13 +19,11 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
-	float objectPosX = 640.0f;
-	float objectPosY = 360.0f;
-	float objectRotation = 0.0f;
-	float roation_speed = 1;
-
 	float mousePosX = 0.0f;
 	float mousePosY = 0.0f;
+
+	dynamic_array<circle> circle_array;
+	//std::vector<circle> circleList;
 
 	void ClearScreen()
 	{
@@ -64,10 +65,13 @@ public:
 protected:
 
 	aie::Renderer2D*	m_2dRenderer;
-	aie::Texture*		m_shipTexture;
 	aie::Font*			m_font;
 
+	float objectPosX = 640;
+	float objectPosY = 360;
+
 	float m_timer;
+	// Sprite stuff
 	float sprite_timer;
 	int across_sprite = 0;
 	int down_sprite = 0;

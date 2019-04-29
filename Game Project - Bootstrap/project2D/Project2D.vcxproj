@@ -179,6 +179,7 @@
   <ItemGroup>
     <ClInclude Include="Application2D.h" />
     <ClInclude Include="circle.h" />
+    <ClInclude Include="dynamic_array.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
