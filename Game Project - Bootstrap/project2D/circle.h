@@ -22,7 +22,8 @@ private:
 
 	float circlePosX = 0;
 	float circlePosY = 0;
-	float m_raidus = 5.0f;
+	float m_radius = 5.0f;
 
+	float circleAlpha = 1;
 };
 
