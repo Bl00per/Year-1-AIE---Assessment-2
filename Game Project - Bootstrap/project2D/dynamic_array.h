@@ -150,7 +150,7 @@ public:
 	}
 
 	// Remove element from the array
-	void remove(size_t a_index, T a_count = 1)
+	void remove(size_t a_index, size_t a_count = 1)
 	{
 		for (size_t i = a_index; i + a_count < m_count; i++)
 		{

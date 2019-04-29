@@ -15,7 +15,7 @@ circle::~circle()
 }
 
 
-void circle::update(float deltaTime)
+bool circle::update(float deltaTime)
 {
 	m_timer += deltaTime;
 	m_radius += deltaTime * 5;
@@ -28,7 +28,9 @@ void circle::update(float deltaTime)
 		if (circleAlpha <= 0)
 		{
 			circleAlpha = 0;
+			return false;
 		}
+		return true;
 	}
 
 }

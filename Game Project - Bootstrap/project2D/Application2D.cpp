@@ -34,6 +34,8 @@ void Application2D::shutdown() {
 void Application2D::update(float deltaTime) {
 	m_timer += deltaTime;
 	sprite_timer += deltaTime;
+	time_until_next_spawn -= deltaTime;
+	//spawns_per_second += 0.05 * deltaTime;
 
 	// input example
 	aie::Input* input = aie::Input::getInstance();
@@ -43,19 +45,32 @@ void Application2D::update(float deltaTime) {
 
 	mousePosX = input->getMouseX();
 	mousePosY = input->getMouseY();
-	std::cout << "The current mouse position is: " << mousePosX << "/" << mousePosY << std::endl;
+	//std::cout << "The current mouse position is: " << mousePosX << "/" << mousePosY << std::endl;
 
 	// Call the update function while i < count
 	for (int i = 0; i < circle_array.count(); i++)
 	{
-		circle_array[i].update(deltaTime);
+		if (!circle_array[i].update(deltaTime))
+		{
+			circle_array.remove(i);
+		}
+
+		
 	}
 
 	// Push a circle to the dynamic array every 1 second
-	if (m_timer >= 1.0f)
+	if (time_until_next_spawn < 0)
 	{
 		circle_array.push(circle(objectPosX, objectPosY));
-		m_timer = 0;
+
+		time_until_next_spawn = 1 / spawns_per_second;
+		std::cout << "Tick at: " << spawns_per_second << std::endl;
+		spawns_per_second += 0.04f;
+	}
+
+	if (spawns_per_second >= 5.0f)
+	{
+		spawns_per_second = 5.0f;
 	}
 
 

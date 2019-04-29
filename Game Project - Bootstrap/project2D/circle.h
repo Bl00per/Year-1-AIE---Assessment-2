@@ -13,7 +13,7 @@ public:
 	~circle();
 
 
-	void update(float deltaTime);
+	bool update(float deltaTime);
 	void draw(aie::Renderer2D*	m_2dRenderer);
 
 private:

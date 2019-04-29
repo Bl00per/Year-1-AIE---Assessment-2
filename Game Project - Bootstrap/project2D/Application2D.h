@@ -71,6 +71,10 @@ protected:
 	float objectPosY = 360;
 
 	float m_timer;
+	// Timer to increase circle spawn rate
+	float time_until_next_spawn = 3.0f;
+	float spawns_per_second = 0.12f;
+	//float circle_timer_modifier = 0.3f;
 	// Sprite stuff
 	float sprite_timer;
 	int across_sprite = 0;
