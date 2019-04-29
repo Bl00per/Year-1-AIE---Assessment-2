@@ -152,10 +152,13 @@ public:
 	// Remove element from the array
 	void remove(size_t a_index, size_t a_count = 1)
 	{
+		//delete m_data[a_index];
+
 		for (size_t i = a_index; i + a_count < m_count; i++)
 		{
 			m_data[i] = m_data[i + a_count];
 		}
+		std::cout << "Object removed." << std::endl;
 
 		m_count -= a_count;
 	}

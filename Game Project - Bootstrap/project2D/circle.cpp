@@ -27,7 +27,6 @@ bool circle::update(float deltaTime)
 		m_radius = 35.0f;
 		if (circleAlpha <= 0)
 		{
-			circleAlpha = 0;
 			return false;
 		}
 		return true;
