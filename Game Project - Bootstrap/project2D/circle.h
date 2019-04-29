@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Application2D.h"
 #include "Renderer2D.h"
 #include "Input.h"
 #include <iostream>
@@ -8,7 +7,7 @@
 class circle
 {
 public:
-	circle();
+	circle() {};
 	circle(float m_circlepositionX, float m_circlepositionY);
 
 	~circle();
@@ -23,7 +22,7 @@ private:
 
 	float circlePosX = 0;
 	float circlePosY = 0;
-	float m_raidus = 0.0f;
+	float m_raidus = 5.0f;
 
 };
 

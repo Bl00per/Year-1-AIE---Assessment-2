@@ -22,10 +22,6 @@ bool Application2D::startup() {
 	m_timer = 0;
 	sprite_timer = 0;
 
-
-	objectPosX = rand() % 1280 + 0;
-	objectPosY = rand() % 720 + 0;
-
 	return true;
 }
 
@@ -38,25 +34,30 @@ void Application2D::shutdown() {
 void Application2D::update(float deltaTime) {
 	m_timer += deltaTime;
 	sprite_timer += deltaTime;
+
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 
+	objectPosX = rand() % 1280 + 0;
+	objectPosY = rand() % 720 + 0;
+
 	mousePosX = input->getMouseX();
 	mousePosY = input->getMouseY();
-	
-
 	std::cout << "The current mouse position is: " << mousePosX << "/" << mousePosY << std::endl;
 
+	// Call the update function while i < count
 	for (int i = 0; i < circle_array.count(); i++)
 	{
 		circle_array[i].update(deltaTime);
 	}
 
+	// Push a circle to the dynamic array every 1 second
 	if (m_timer >= 1.0f)
 	{
 		circle_array.push(circle(objectPosX, objectPosY));
 		m_timer = 0;
 	}
+
 
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
@@ -71,6 +72,9 @@ void Application2D::draw() {
 	// begin drawing sprites
 	m_2dRenderer->begin();
 
+	// set the UV for all sprites
+	m_2dRenderer->setUVRect(0, 0, 1.0f, 1.0f);
+	
 	//if (sprite_timer >= 0.05f) {
 	//	sprite_timer = 0.0f;
 
@@ -88,16 +92,13 @@ void Application2D::draw() {
 	//m_2dRenderer->setUVRect((float)across_sprite / 10.0f, (float)down_sprite / 6.0f, 1.0f / 10.0f, 1.0/6.0f);
 	//m_2dRenderer->drawSprite(m_fire, 640, 270, 500, 200, 0, 0.8f);
 
-
-
-
-	m_2dRenderer->setUVRect(0, 0, 1.0f, 1.0f);
-
+	// Every time a circle is pushed in update, draw a circle to the screen
 	for (int i = 0; i < circle_array.count(); i++)
 	{
 		circle_array[i].draw(m_2dRenderer);
 	}
 	
+
 	// output some text, uses the last used colour
 	char fps[32];
 	sprintf_s(fps, 32, "FPS: %i", getFPS());
