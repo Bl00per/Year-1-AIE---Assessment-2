@@ -117,8 +117,32 @@ void Player::draw(aie::Renderer2D*	m_2dRenderer) {
 	m_2dRenderer->setUVRect(0, 0, 1.0f, 1.0f);
 	m_2dRenderer->drawSprite(m_shipTexture, positionX, positionY, 0, 0, rotation, 0.9);
 
+	m_2dRenderer->drawCircle(positionX, positionY, m_radius, 1);
+
 	// Draw bullet
 	for (int i = 0; i < bulletList.size(); i++) {
 		bulletList[i].draw(m_2dRenderer);
 	}
 }
+
+float Player::getPlayerPosX()
+{
+	return positionX;
+}
+
+float Player::getPlayerPosY()
+{
+	return positionY;
+}
+
+void Player::setShipRadius(float a_radius)
+{
+	m_radius = a_radius;
+}
+
+
+float Player::getShipRadius() const
+{
+	return m_radius;
+}
+

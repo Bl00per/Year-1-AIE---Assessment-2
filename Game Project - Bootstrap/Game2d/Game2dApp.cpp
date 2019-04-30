@@ -18,6 +18,7 @@ bool Game2dApp::startup() {
 	m_2dRenderer = new aie::Renderer2D();
 
 	mainCharacter = new Player();
+	mainCharacter->setShipRadius(40.0f);
 
 	asteroidSmall = new Asteroid_small();
 	asteroidMedium = new Asteroid_medium();
@@ -73,4 +74,20 @@ void Game2dApp::draw() {
 	// done drawing sprites
 	m_2dRenderer->end();
 }
+
+bool Game2dApp::detect_collision(Player* a_object_1, Asteroid_large* a_object_2)
+{
+	float distance =
+		sqrt(((a_object_1->getPlayerPosX() - a_object_2->getAsteroidPosX()) *
+		(a_object_1->getPlayerPosX() - a_object_2->getAsteroidPosX()) +
+			(a_object_1->getPlayerPosY() - a_object_2->getAsteroidPosY()) *
+			(a_object_1->getPlayerPosY() - a_object_2->getAsteroidPosY())));
+
+	if (distance < a_object_1->getShipRadius() + a_object_2->getAsteroidRadius())
+	{
+		return true;
+	}
+	return false;
+}
+
 

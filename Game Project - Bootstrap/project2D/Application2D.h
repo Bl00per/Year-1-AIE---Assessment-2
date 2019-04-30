@@ -19,11 +19,10 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
-	float mousePosX = 0.0f;
-	float mousePosY = 0.0f;
-
 	dynamic_array<circle> circle_array;
-	//std::vector<circle> circleList;
+	
+	float getMousePosX();
+	float getMousePosY();
 
 	void ClearScreen()
 	{
@@ -63,20 +62,31 @@ public:
 	}
 
 protected:
-
 	aie::Renderer2D*	m_2dRenderer;
 	aie::Font*			m_font;
+	aie::Texture*		m_health;
+	circle*				circleObject;
 
-	float objectPosX = 640;
-	float objectPosY = 360;
+	// Get the X & Y positions of the mouse
+	float mousePosX = 0.0f;
+	float mousePosY = 0.0f;
+
+	// Object positions to pass to the circles
+	float objectPosX = 0;
+	float objectPosY = 0;
+
 
 	float m_timer;
-	// Timer to increase circle spawn rate
+
+	// Timer to increase circle spawn rate as the game progress
 	float time_until_next_spawn = 3.0f;
 	float spawns_per_second = 0.12f;
-	//float circle_timer_modifier = 0.3f;
+
 	// Sprite stuff
 	float sprite_timer;
 	int across_sprite = 0;
 	int down_sprite = 0;
+
+	// Collision Detection
+	bool detect_collision(circle* a_circle, float a_mousePosX, float a_mousePosY);
 };

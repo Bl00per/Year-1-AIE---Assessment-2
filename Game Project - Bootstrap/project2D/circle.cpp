@@ -39,3 +39,8 @@ void circle::draw(aie::Renderer2D*	m_2dRenderer)
 	m_2dRenderer->setRenderColour(1, 0, 0.25, circleAlpha);
 	m_2dRenderer->drawCircle(circlePosX, circlePosY, m_radius);
 }
+
+float circle::get_radius()
+{
+	return m_radius;
+}

@@ -56,4 +56,20 @@ void Asteroid_large::draw(aie::Renderer2D* m_2dRenderer) {
 
 	// Large sized
 	m_2dRenderer->drawSprite(m_asteroid, positionX, tan(m_timer * 3) * -100 + 720, 192, 208, rotation_lrg, 0.8);
+	m_2dRenderer->drawCircle(positionX, tan(m_timer * 3) * -100 + 720, m_radius, 0.7);
+}
+
+float Asteroid_large::getAsteroidPosX()
+{
+	return positionX;
+}
+
+float Asteroid_large::getAsteroidPosY()
+{
+	return positionY;
+}
+
+float Asteroid_large::getAsteroidRadius()
+{
+	return m_radius;
 }
