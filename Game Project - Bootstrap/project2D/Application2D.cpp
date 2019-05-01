@@ -39,12 +39,18 @@ void Application2D::update(float deltaTime) {
 	time_until_next_spawn -= deltaTime;
 	//spawns_per_second += 0.05 * deltaTime;
 
+
+	//circle circleClass; 
+	//circleClass.updateHealth(deltaTime);
+
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 
 	// Get a random X and Y position to spawn the circles
 	objectPosX = rand() % 1280 + 0;
 	objectPosY = rand() % 720 + 0;
+
+	std::cout << "Current random numbers: " << objectPosX << '/' << objectPosY << std::endl;
 
 	mousePosX = input->getMouseX();
 	mousePosY = input->getMouseY();
@@ -53,7 +59,7 @@ void Application2D::update(float deltaTime) {
 	// Call the update function while i < count
 	for (int i = 0; i < circle_array.count(); i++)
 	{
-		if (!circle_array[i].update(deltaTime))
+		if (!circle_array[i].update(deltaTime, this))
 		{
 			circle_array.remove(i);
 		}
@@ -64,13 +70,19 @@ void Application2D::update(float deltaTime) {
 		if (detect_collision(&circle_array[i], mousePosX, mousePosY) && input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))
 		{
 			circle_array.remove(i);
+		}
 
-			if (down_sprite == 4)
-				down_sprite = 4;
+		if (!detect_collision(&circle_array[i], mousePosX, mousePosY) && input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))
+		{
+			if (NumberHeartsLoss >= 3)
+				NumberHeartsLoss = 3;
 			else
-			down_sprite--;
+				NumberHeartsLoss++;
 		}
 	}
+
+
+
 
 	// Push a circle to the dynamic array every 1 second
 	if (time_until_next_spawn < 0)
@@ -105,8 +117,8 @@ void Application2D::draw() {
 	m_2dRenderer->setUVRect(0, 0, 1, 1);
 
 	// demonstrate animation			Across				Down	Where across/Where down
-	m_2dRenderer->setUVRect((float)across_sprite / 1.0f, (float)down_sprite / 4.0f, 1.0f / 1.0f, 1.0/4.0f);
-	m_2dRenderer->drawSprite(m_health, 640, 360, 900, 300, 0, 0.9);
+	m_2dRenderer->setUVRect(1.0f / 1.0f, (float)NumberHeartsLoss / 4.0f, 1.0f / 1.0f, 1.0/4.0f);
+	m_2dRenderer->drawSprite(m_health, 1063, 60, 418, 103, 0, 0.9);
 
 	// Every time a circle is pushed in update, draw a circle to the screen
 	for (int i = 0; i < circle_array.count(); i++)
@@ -134,6 +146,16 @@ float Application2D::getMousePosY()
 {
 	return mousePosY;
 }
+
+void Application2D::updateHealth(int a_removeHeart)
+{
+
+	if (NumberHeartsLoss >= 3)
+		NumberHeartsLoss = 3; // If all hearts are gone, keep it gone
+	else
+	NumberHeartsLoss += a_removeHeart;	// When the circle disappears, subtract a heart
+}
+
 
 bool Application2D::detect_collision(circle* a_circle, float a_mousePosX, float a_mousePosY)
 {

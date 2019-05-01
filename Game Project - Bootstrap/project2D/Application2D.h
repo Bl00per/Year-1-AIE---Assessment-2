@@ -24,6 +24,8 @@ public:
 	float getMousePosX();
 	float getMousePosY();
 
+	void updateHealth(int a_removeHeart);
+
 	void ClearScreen()
 	{
 		HANDLE                     hStdOut;
@@ -84,8 +86,7 @@ protected:
 
 	// Sprite stuff
 	float sprite_timer;
-	int across_sprite = 0;
-	int down_sprite = 0;
+	int NumberHeartsLoss = 0;
 
 	// Collision Detection
 	bool detect_collision(circle* a_circle, float a_mousePosX, float a_mousePosY);
