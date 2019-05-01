@@ -17,7 +17,6 @@ public:
 
 	bool update(float deltaTime, Application2D* app2D);
 	void draw(aie::Renderer2D*	m_2dRenderer);
-	/*void updateHealth(float deltaTime);*/
 	
 	float get_radius();
 

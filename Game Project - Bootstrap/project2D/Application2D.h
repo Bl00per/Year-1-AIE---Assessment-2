@@ -18,13 +18,17 @@ public:
 
 	virtual void update(float deltaTime);
 	virtual void draw();
+	bool waitingForPlayer();
 
 	dynamic_array<circle> circle_array;
 	
+	void generatePositionX(float deltaTime);
+	void generatePositionY(float deltaTime);
+
 	float getMousePosX();
 	float getMousePosY();
 
-	void updateHealth(int a_removeHeart);
+	void updateHealth(int a_removeHeart, int a_removeTotalHearts);
 
 	void ClearScreen()
 	{
@@ -67,6 +71,8 @@ protected:
 	aie::Renderer2D*	m_2dRenderer;
 	aie::Font*			m_font;
 	aie::Texture*		m_health;
+	aie::Texture*		m_gameoverLogo;
+	aie::Texture*		m_escape;
 	circle*				circleObject;
 
 	// Get the X & Y positions of the mouse
@@ -77,7 +83,6 @@ protected:
 	float objectPosX = 0;
 	float objectPosY = 0;
 
-
 	float m_timer;
 
 	// Timer to increase circle spawn rate as the game progress
@@ -87,6 +92,7 @@ protected:
 	// Sprite stuff
 	float sprite_timer;
 	int NumberHeartsLoss = 0;
+	int TotalHearts = 3;
 
 	// Collision Detection
 	bool detect_collision(circle* a_circle, float a_mousePosX, float a_mousePosY);

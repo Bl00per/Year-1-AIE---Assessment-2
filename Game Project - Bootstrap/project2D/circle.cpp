@@ -1,10 +1,8 @@
 #include "circle.h"
 #include "Application2D.h"
-#include <ctime>
 
 circle::circle(float m_circlePosX, float m_circlePosY)
 {
-	srand(time(NULL));
 	circlePosX = m_circlePosX;
 	circlePosY = m_circlePosY;
 }
@@ -28,26 +26,13 @@ bool circle::update(float deltaTime, Application2D* app2D)
 		m_radius = 35.0f;
 		if (circleAlpha <= 0)
 		{
-			app2D->updateHealth(1);
+			app2D->updateHealth(1, 1);
 			return false;
 		}
 		return true;
 	}
 
 }
-
-//void circle::updateHealth(float deltaTime)
-//{
-//	m_timer += deltaTime;
-//
-//
-//	if (circleAlpha <= 0)
-//	{
-//		
-//	}
-//
-//}
-
 
 void circle::draw(aie::Renderer2D*	m_2dRenderer)
 {
