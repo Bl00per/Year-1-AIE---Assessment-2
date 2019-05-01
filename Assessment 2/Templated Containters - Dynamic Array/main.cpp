@@ -34,7 +34,8 @@ int main() {
 	{
 	start:
 		system("cls");
-		std::cout << "Select option:\n[1] - View array\n"
+		std::cout << "Select option:\n"
+			"[1] - View array\n"
 			"[2] - Add to end of array\n"
 			"[3] - Remove from end of array\n"
 			"[4] - Add 1 or more elements to array\n"

@@ -50,7 +50,7 @@ public:
 			hashIndex %= capacity;
 		}
 
-		// Ifa new node is to be inserted, increase the current size
+		// If a new node is to be inserted, increase the current size
 		if (table[hashIndex] == NULL || table[hashIndex]->key == -1)
 		{
 			size++;
