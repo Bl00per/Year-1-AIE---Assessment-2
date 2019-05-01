@@ -1,57 +1,49 @@
+// ~~~*Reference*~~~
+//
+// Title: C++ Program to Implement Hash Tables
+// Author: Karthikeya Boyini
+// Date: 2019
+// Availablity: https://www.tutorialspoint.com/cplusplus-program-to-implement-hash-tables
+//
+
+
 #include <iostream>
 #include <string>
-#include <vector>
 #include "HashFunction.h"
 #include "HashTable.h"
-#include "main.h"
-
-namespace HashFunction {
-	unsigned int badHash(const char* data, unsigned int length)
-	{
-		unsigned int hash = 0;
-
-		for (unsigned int i = 0; i < length; i++)
-		{
-			hash += data[i];
-		}
-		return hash;
-	}
-
-	unsigned int BKDRHash(const std::string& str)
-	{
-		unsigned int hash = 0;
-		for (unsigned int i = 0; i < str.length(); ++i)
-		{
-			hash = (hash * 1313) + str[i];
-		}
-		return(hash & 0x7FFFFFFF);
-	}
-}
-
 
 
 int main()
 {
-	HashTable hash_table;
-	std::string str;
+	HashTable<int, int> *hash_table = new HashTable<int, int>;
 
-	std::cin >> str;
-	const char* c = str.c_str();
-	int userInput_size = sizeof(c);
+	std::string userInputHash;
+	int userInput_key = 0;
+	int userInput_value = 0;
 
-	std::cout << HashFunction::defaultHash(c, userInput_size) << std::endl;
-
-
-	int hashTable_key = HashFunction::defaultHash("Will", 4);
-	hash_table.put(15, 123901209);
-	
+	hash_table->insertNode(1, 1);
+	hash_table->insertNode(2, 2);
+	hash_table->insertNode(3, 5);
 
 
+	std::cout << "Enter characters to convert to Hash:\n";
+	std::getline(std::cin, userInputHash);
+	const char* convertedData = userInputHash.c_str();
 
+	auto hashData = HashFunction::defaultHash(convertedData, sizeof(convertedData));
 
+	std::cout << "Please enter the key where you would like to place the Hashed data: " << std::endl;
+	std::cin >> userInput_key;
 
-	// get the char* using &writable[0] or &*writable.begin()
+	hash_table->insertNode(userInput_key, hashData);
 
+	//hash_table->display();
 
+	std::cout << hash_table->get(5) << std::endl;
+
+	//std::cout <<  << std::endl;
+	//std::cout << hashData << std::endl;
+
+	system("Pause");
 	return 0;
 }

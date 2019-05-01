@@ -41,8 +41,7 @@ int main() {
 			"[5] - Remove elements from array\n"
 			"[6] - Display amount of values in array\n"
 			"[7] - Display capacity of array\n"
-			""
-			"[9] - Exit\n"
+			"[8] - Exit\n"
 			"\nInput: ";
 		std::cin >> userInput_dynamic;
 		clearInput();

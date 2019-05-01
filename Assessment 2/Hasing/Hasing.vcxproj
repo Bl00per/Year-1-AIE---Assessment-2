@@ -119,7 +119,6 @@
     <ClInclude Include="HashFunction.h" />
     <ClInclude Include="HashNode.h" />
     <ClInclude Include="HashTable.h" />
-    <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
