@@ -27,7 +27,6 @@ bool Application2D::startup()
 	m_buttonQuit = new Button_quit();
 
 	m_timer = 0;
-	sprite_timer = 0;
 
 	isButtonClicked_Play = false;
 	isButtonClicked_Retry = false;
@@ -48,12 +47,12 @@ void Application2D::shutdown()
 	delete m_buttonPlay;
 	delete m_buttonRetry;
 	delete m_buttonQuit;
+	circle_array.clear();
 }
 
 void Application2D::update(float deltaTime)
 {
 	m_timer += deltaTime;
-	sprite_timer += deltaTime;
 	time_until_next_spawn -= deltaTime;
 
 	// input example
@@ -145,12 +144,27 @@ void Application2D::update(float deltaTime)
 		//std::cout << "The current mouse position is: " << mousePosX << "/" << mousePosY << std::endl;
 		//std::cout << "Current random numbers: " << objectPosX << '/' << objectPosY << std::endl;
 
+		// Retry button
+		if (isButtonClicked_Retry)
+		{
+			NumberHeartsLoss = 0;
+			TotalHearts = 3;
+			spawns_per_second = 0.12f;
+			time_until_next_spawn = 3.0f;
+			isButtonClicked_Retry = false;
+			isButtonClicked_Play = false;
+		}
+
+
+
+
+
 		// exit the application
 		if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		{
 			quit();
 		}
-		else if (m_buttonQuit->buttonClicked())
+		else if (isButtonClicked_Quit)
 		{
 			quit();
 		}

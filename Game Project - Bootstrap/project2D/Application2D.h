@@ -101,7 +101,6 @@ protected:
 	float spawns_per_second = 0.12f;
 
 	// Sprite stuff
-	float sprite_timer;
 	int NumberHeartsLoss = 0;
 	int TotalHearts = 3;
 

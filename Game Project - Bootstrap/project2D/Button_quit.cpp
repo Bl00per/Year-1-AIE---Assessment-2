@@ -34,6 +34,7 @@ bool Button_quit::update()
 		// Return whether the mouse button is clicked while colliding
 		buttonHovered = true;
 		return input->wasMouseButtonReleased(aie::INPUT_MOUSE_BUTTON_LEFT);
+		//return input->isMouseButtonDown(aie::INPUT_MOUSE_BUTTON_LEFT);
 	}
 	buttonHovered = false;
 	return false;

@@ -181,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application2D.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Button_play.h" />
     <ClInclude Include="Button_quit.h" />
     <ClInclude Include="Button_retry.h" />
