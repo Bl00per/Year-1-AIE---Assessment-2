@@ -54,11 +54,9 @@ void Button_play::draw(aie::Renderer2D* renderer)
 	// Draw play button sprite
 	renderer->setUVRect(0, 0, 1.0f, 1.0f);
 	renderer->drawSprite(m_play, m_posX, m_posY, m_width, m_height);
-	
-
 }
 
-bool Button_play::buttonClicked()
+bool Button_play::buttonClickedPlay()
 {
 	if (update())
 	{

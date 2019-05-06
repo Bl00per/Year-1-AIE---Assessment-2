@@ -1,7 +1,9 @@
 #pragma once
+
 #include "Renderer2D.h"
 #include "Input.h"
 #include "Texture.h"
+#include "Button.h"
 
 class Button_play
 {
@@ -12,7 +14,7 @@ public:
 	void draw(aie::Renderer2D* renderer);
 	bool update();
 
-	bool buttonClicked();
+	bool buttonClickedPlay();
 
 private:
 	aie::Texture*	m_play;

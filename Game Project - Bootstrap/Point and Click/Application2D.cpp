@@ -6,11 +6,13 @@
 #include <iostream>
 #include <ctime>
 
-Application2D::Application2D() {
+Application2D::Application2D() 
+{
 
 }
 
-Application2D::~Application2D() {
+Application2D::~Application2D() 
+{
 
 }
 
@@ -31,6 +33,7 @@ bool Application2D::startup()
 	isButtonClicked_Play = false;
 	isButtonClicked_Retry = false;
 	isButtonClicked_Quit = false;
+	waitingOnUser = false;
 
 	srand(time(NULL));
 
@@ -63,16 +66,18 @@ void Application2D::update(float deltaTime)
 	mousePosY = input->getMouseY();
 
 	// Check if buttons have been pressed
-	if (m_buttonPlay->buttonClicked())
+	if (m_buttonPlay->buttonClickedPlay())
 	{
 		isButtonClicked_Play = true;
 	}
-	else if (m_buttonRetry->buttonClicked())
+
+	if (m_buttonRetry->buttonClickedRetry())
 	{
 		isButtonClicked_Retry = true;
 		std::cout << "Retry button clicked" << std::endl;
 	}
-	else if (m_buttonQuit->buttonClicked())
+
+	if (m_buttonQuit->buttonClickedQuit())
 	{
 		isButtonClicked_Quit = true;
 		std::cout << "Quit button clicked" << std::endl;
@@ -140,31 +145,34 @@ void Application2D::update(float deltaTime)
 			spawns_per_second += 0.04f;
 		}
 
-		//std::cout << "Current time until next spawn: " << time_until_next_spawn << std::endl;
-		//std::cout << "The current mouse position is: " << mousePosX << "/" << mousePosY << std::endl;
-		//std::cout << "Current random numbers: " << objectPosX << '/' << objectPosY << std::endl;
-
-		// Retry button
-		if (isButtonClicked_Retry)
+		if (TotalHearts == 0)
 		{
-			NumberHeartsLoss = 0;
-			TotalHearts = 3;
-			spawns_per_second = 0.12f;
-			time_until_next_spawn = 3.0f;
-			isButtonClicked_Retry = false;
-			isButtonClicked_Play = false;
+			waitingOnUser = true;
 		}
 
+		if (waitingOnUser)
+		{
+			// Retry button
+			if (isButtonClicked_Retry && TotalHearts == 0)
+			{
+				NumberHeartsLoss = 0;
+				TotalHearts = 3;
+				spawns_per_second = 0.12f;
+				time_until_next_spawn = 3.0f;
+				circle_array.clear();
+				isButtonClicked_Retry = false;
+				waitingOnUser = false;
+			}
 
-
-
+			// Quit button
+			if (isButtonClicked_Quit && TotalHearts == 0)
+			{
+				quit();
+			}
+		}
 
 		// exit the application
 		if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
-		{
-			quit();
-		}
-		else if (isButtonClicked_Quit)
 		{
 			quit();
 		}
@@ -196,6 +204,7 @@ void Application2D::draw()
 	// If the player has run out of hearts, display the gameover screen
 	if (TotalHearts <= 0)
 	{
+		Sleep(100);
 		// Game over sprite
 		m_2dRenderer->setUVRect(0, 0, 1, 1);
 		m_2dRenderer->setRenderColour(1.0f, 1.0f, 1.0f, 1.0f);

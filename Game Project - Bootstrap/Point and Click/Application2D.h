@@ -3,9 +3,7 @@
 #include "Application.h"
 #include "Renderer2D.h"
 #include "circle.h"
-#include "Button_play.h"
-#include "Button_quit.h"
-#include "Button_retry.h"
+#include "Button.h"
 #include "dynamic_array.h"
 #include <Windows.h>
 #include <vector>
@@ -21,7 +19,6 @@ public:
 
 	virtual void update(float deltaTime);
 	virtual void draw();
-	//bool waitingForPlayer();
 
 	dynamic_array<circle> circle_array;
 	
@@ -91,8 +88,8 @@ protected:
 	float mousePosY = 0.0f;
 
 	// Object positions to pass to the circles
-	float objectPosX = 0;
-	float objectPosY = 0;
+	int objectPosX = 0;
+	int objectPosY = 0;
 
 	float m_timer;
 
@@ -103,6 +100,8 @@ protected:
 	// Sprite stuff
 	int NumberHeartsLoss = 0;
 	int TotalHearts = 3;
+
+	bool waitingOnUser;
 
 	// Collision Detection
 	bool detect_collision(circle* a_circle, float a_mousePosX, float a_mousePosY);
