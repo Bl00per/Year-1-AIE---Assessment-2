@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "Renderer2D.h"
 #include "circle.h"
+#include "Button.h"
 #include "dynamic_array.h"
 #include <Windows.h>
 #include <vector>
@@ -18,7 +19,7 @@ public:
 
 	virtual void update(float deltaTime);
 	virtual void draw();
-	bool waitingForPlayer();
+	//bool waitingForPlayer();
 
 	dynamic_array<circle> circle_array;
 	
@@ -74,6 +75,9 @@ protected:
 	aie::Texture*		m_gameoverLogo;
 	aie::Texture*		m_escape;
 	circle*				circleObject;
+	Button*				m_button;
+
+	bool is_button_clicked;
 
 	// Get the X & Y positions of the mouse
 	float mousePosX = 0.0f;

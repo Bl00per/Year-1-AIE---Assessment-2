@@ -173,11 +173,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application2D.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="circle.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application2D.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="circle.h" />
     <ClInclude Include="dynamic_array.h" />
   </ItemGroup>

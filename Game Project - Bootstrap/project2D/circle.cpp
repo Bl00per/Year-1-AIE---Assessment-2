@@ -7,11 +7,9 @@ circle::circle(float m_circlePosX, float m_circlePosY)
 	circlePosY = m_circlePosY;
 }
 
-
 circle::~circle()
 {
 }
-
 
 bool circle::update(float deltaTime, Application2D* app2D)
 {
@@ -30,6 +28,7 @@ bool circle::update(float deltaTime, Application2D* app2D)
 		}
 	}
 
+	// This is for the colour changing why the cursor is hovering over the circle
 	if (m_is_hovering)
 	{
 		if (!redComplete)
@@ -38,7 +37,6 @@ bool circle::update(float deltaTime, Application2D* app2D)
 			if (m_blue > 0)
 			{
 				m_blue -= deltaTime;
-
 			}
 
 			// Increase red over time
