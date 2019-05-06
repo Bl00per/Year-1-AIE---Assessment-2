@@ -173,13 +173,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application2D.cpp" />
-    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Button_play.cpp" />
+    <ClCompile Include="Button_quit.cpp" />
+    <ClCompile Include="Button_retry.cpp" />
     <ClCompile Include="circle.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application2D.h" />
-    <ClInclude Include="Button.h" />
+    <ClInclude Include="Button_play.h" />
+    <ClInclude Include="Button_quit.h" />
+    <ClInclude Include="Button_retry.h" />
     <ClInclude Include="circle.h" />
     <ClInclude Include="dynamic_array.h" />
   </ItemGroup>

@@ -3,11 +3,11 @@
 #include "Input.h"
 #include "Texture.h"
 
-class Button
+class Button_play
 {
 public:
-	Button();
-	~Button();
+	Button_play();
+	~Button_play();
 
 	void draw(aie::Renderer2D* renderer);
 	bool update();
@@ -21,5 +21,7 @@ private:
 	float m_posY = 360;
 	float m_width = 590;
 	float m_height = 185;
+
+	bool buttonHovered = false;
 };
 

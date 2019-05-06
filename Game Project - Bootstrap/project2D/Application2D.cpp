@@ -22,12 +22,16 @@ bool Application2D::startup()
 	m_gameoverLogo = new aie::Texture("../bin/textures/GameoverLogo.png");
 	m_escape = new aie::Texture("../bin/textures/QuitESC.png");
 	m_font = new aie::Font("./font/consolas_bold.ttf", 32);
-	m_button = new Button();
+	m_buttonPlay = new Button_play();
+	m_buttonRetry = new Button_retry();
+	m_buttonQuit = new Button_quit();
 
 	m_timer = 0;
 	sprite_timer = 0;
 
-	is_button_clicked = false;
+	isButtonClicked_Play = false;
+	isButtonClicked_Retry = false;
+	isButtonClicked_Quit = false;
 
 	srand(time(NULL));
 
@@ -41,7 +45,9 @@ void Application2D::shutdown()
 	delete m_health;
 	delete m_gameoverLogo;
 	delete m_escape;
-	delete m_button;
+	delete m_buttonPlay;
+	delete m_buttonRetry;
+	delete m_buttonQuit;
 }
 
 void Application2D::update(float deltaTime)
@@ -53,16 +59,28 @@ void Application2D::update(float deltaTime)
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 
+	// Get mouse coordinates
 	mousePosX = input->getMouseX();
 	mousePosY = input->getMouseY();
 
-	if (m_button->buttonClicked())
+	// Check if buttons have been pressed
+	if (m_buttonPlay->buttonClicked())
 	{
-		is_button_clicked = true;
+		isButtonClicked_Play = true;
+	}
+	else if (m_buttonRetry->buttonClicked())
+	{
+		isButtonClicked_Retry = true;
+		std::cout << "Retry button clicked" << std::endl;
+	}
+	else if (m_buttonQuit->buttonClicked())
+	{
+		isButtonClicked_Quit = true;
+		std::cout << "Quit button clicked" << std::endl;
 	}
 
 	// Check if Play button has been clicked
-	if (is_button_clicked)
+	if (isButtonClicked_Play)
 	{
 		// Call the update function while i < count
 		for (int i = 0; i < circle_array.count(); i++)
@@ -73,6 +91,7 @@ void Application2D::update(float deltaTime)
 			}
 		}
 
+		// While the player has hearts, keep playing
 		if (TotalHearts > 0)
 		{
 			for (int i = 0; i < circle_array.count(); i++)
@@ -95,6 +114,7 @@ void Application2D::update(float deltaTime)
 			}
 		}
 
+		// If the cursor is hovering a circle, make it cycle the colours
 		for (int i = 0; i < circle_array.count(); i++)
 		{
 			if (detect_collision(&circle_array[i], mousePosX, mousePosY))
@@ -127,7 +147,13 @@ void Application2D::update(float deltaTime)
 
 		// exit the application
 		if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
+		{
 			quit();
+		}
+		else if (m_buttonQuit->buttonClicked())
+		{
+			quit();
+		}
 	}
 }
 
@@ -153,20 +179,26 @@ void Application2D::draw()
 		circle_array[i].draw(m_2dRenderer);
 	}
 
+	// If the player has run out of hearts, display the gameover screen
 	if (TotalHearts <= 0)
 	{
+		// Game over sprite
 		m_2dRenderer->setUVRect(0, 0, 1, 1);
-		m_2dRenderer->setRenderColour(1, 1, 1, 1);
+		m_2dRenderer->setRenderColour(1.0f, 1.0f, 1.0f, 1.0f);
 		m_2dRenderer->drawSprite(m_gameoverLogo, 640, 380,
 			m_gameoverLogo->getWidth() / 1.5f, m_gameoverLogo->getHeight() / 1.5f, 0, 0);
-		m_2dRenderer->drawSprite(m_escape, 640, 315,
-			m_escape->getWidth() / 4, m_escape->getHeight() / 4, 0, 0);
+
+		// Quit button sprite
+		m_buttonQuit->draw(m_2dRenderer);
+
+		// Retry button sprite
+		m_buttonRetry->draw(m_2dRenderer);
 	}
 
 	// Draw button
-	if (!is_button_clicked)
+	if (!isButtonClicked_Play)
 	{
-		m_button->draw(m_2dRenderer);
+		m_buttonPlay->draw(m_2dRenderer);
 	}
 
 	// output some text

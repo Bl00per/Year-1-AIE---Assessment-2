@@ -3,7 +3,9 @@
 #include "Application.h"
 #include "Renderer2D.h"
 #include "circle.h"
-#include "Button.h"
+#include "Button_play.h"
+#include "Button_quit.h"
+#include "Button_retry.h"
 #include "dynamic_array.h"
 #include <Windows.h>
 #include <vector>
@@ -75,9 +77,14 @@ protected:
 	aie::Texture*		m_gameoverLogo;
 	aie::Texture*		m_escape;
 	circle*				circleObject;
-	Button*				m_button;
+	Button_play*		m_buttonPlay;
+	Button_retry*		m_buttonRetry;
+	Button_quit*		m_buttonQuit;
 
-	bool is_button_clicked;
+
+	bool isButtonClicked_Play;
+	bool isButtonClicked_Retry;
+	bool isButtonClicked_Quit;
 
 	// Get the X & Y positions of the mouse
 	float mousePosX = 0.0f;
