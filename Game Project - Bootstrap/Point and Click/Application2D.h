@@ -92,6 +92,7 @@ protected:
 	int objectPosY = 0;
 
 	float m_timer;
+	float end_timer;
 
 	// Timer to increase circle spawn rate as the game progress
 	float time_until_next_spawn = 3.0f;

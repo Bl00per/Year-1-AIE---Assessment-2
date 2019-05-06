@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "Texture.h"
 #include "Button.h"
+#include <windows.h>
 
 class Button_retry
 {
@@ -12,7 +13,7 @@ public:
 	~Button_retry();
 
 	void draw(aie::Renderer2D* renderer);
-	bool update();
+	bool update(bool a_bIsActive);
 
 	bool buttonClickedRetry();
 
@@ -25,5 +26,7 @@ private:
 	float m_height = 76;
 
 	bool buttonHovered = false;
+
+	bool m_bIsActive = false;
 };
 

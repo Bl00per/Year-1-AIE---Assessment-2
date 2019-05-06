@@ -6,12 +6,12 @@
 #include <iostream>
 #include <ctime>
 
-Application2D::Application2D() 
+Application2D::Application2D()
 {
 
 }
 
-Application2D::~Application2D() 
+Application2D::~Application2D()
 {
 
 }
@@ -29,6 +29,7 @@ bool Application2D::startup()
 	m_buttonQuit = new Button_quit();
 
 	m_timer = 0;
+	end_timer = 0;
 
 	isButtonClicked_Play = false;
 	isButtonClicked_Retry = false;
@@ -61,9 +62,15 @@ void Application2D::update(float deltaTime)
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 
+	Button_retry retryButton;
+
 	// Get mouse coordinates
 	mousePosX = input->getMouseX();
 	mousePosY = input->getMouseY();
+
+	// Generate the position of the circle spawn
+	generatePositionX(deltaTime);
+	generatePositionY(deltaTime);
 
 	// Check if buttons have been pressed
 	if (m_buttonPlay->buttonClickedPlay())
@@ -116,6 +123,11 @@ void Application2D::update(float deltaTime)
 					}
 				}
 			}
+
+			if (TotalHearts == 0)
+			{
+				retryButton.update(1);
+			}
 		}
 
 		// If the cursor is hovering a circle, make it cycle the colours
@@ -132,9 +144,6 @@ void Application2D::update(float deltaTime)
 			}
 		}
 
-		generatePositionX(deltaTime);
-		generatePositionY(deltaTime);
-
 		// Push a circle to the dynamic array every 1 second, decreasing over time
 		if (time_until_next_spawn < 0)
 		{
@@ -145,30 +154,22 @@ void Application2D::update(float deltaTime)
 			spawns_per_second += 0.04f;
 		}
 
-		if (TotalHearts == 0)
+		// Retry button
+		if (isButtonClicked_Retry && TotalHearts == 0)
 		{
-			waitingOnUser = true;
+			NumberHeartsLoss = 0;
+			TotalHearts = 3;
+			spawns_per_second = 0.12f;
+			time_until_next_spawn = 3.0f;
+			circle_array.clear();
+			isButtonClicked_Retry = false;
+			waitingOnUser = false;
 		}
 
-		if (waitingOnUser)
+		// Quit button
+		if (isButtonClicked_Quit && TotalHearts == 0)
 		{
-			// Retry button
-			if (isButtonClicked_Retry && TotalHearts == 0)
-			{
-				NumberHeartsLoss = 0;
-				TotalHearts = 3;
-				spawns_per_second = 0.12f;
-				time_until_next_spawn = 3.0f;
-				circle_array.clear();
-				isButtonClicked_Retry = false;
-				waitingOnUser = false;
-			}
-
-			// Quit button
-			if (isButtonClicked_Quit && TotalHearts == 0)
-			{
-				quit();
-			}
+			quit();
 		}
 
 		// exit the application
@@ -204,7 +205,6 @@ void Application2D::draw()
 	// If the player has run out of hearts, display the gameover screen
 	if (TotalHearts <= 0)
 	{
-		Sleep(100);
 		// Game over sprite
 		m_2dRenderer->setUVRect(0, 0, 1, 1);
 		m_2dRenderer->setRenderColour(1.0f, 1.0f, 1.0f, 1.0f);
