@@ -23,9 +23,20 @@ public:
 	float GetPosX() const { return circlePosX; }
 	float GetPosY() const { return circlePosY; }
 
+	void setHovering(bool a_is_hovering);
+
+
 protected:
 	aie::Renderer2D*	m_2dRenderer;
 	float m_timer;
+
+	float m_red = 0.0f;
+	float m_green = 0.0f;
+	float m_blue = 0.0f;
+	bool redComplete = false;
+	bool greenComplete = false;
+
+	bool m_is_hovering = false;
 
 	float circlePosX = 0;
 	float circlePosY = 0;

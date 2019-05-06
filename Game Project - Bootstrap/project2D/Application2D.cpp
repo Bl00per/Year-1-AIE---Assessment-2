@@ -79,18 +79,33 @@ void Application2D::update(float deltaTime)
 				circle_array.remove(i);
 			}
 
-			if (!detect_collision(&circle_array[i], mousePosX, mousePosY) && input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))
+			else if (!detect_collision(&circle_array[i], mousePosX, mousePosY) && input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))
 			{
 				if (NumberHeartsLoss >= 3)
-					NumberHeartsLoss = 3;
+					NumberHeartsLoss = 3; // Set sprite to display no hearts
 				else
 				{
-					NumberHeartsLoss++;
-					TotalHearts--;
+					NumberHeartsLoss++; // Update sprite
+					TotalHearts--; // Update health
 				}
 			}
 		}
 	}
+
+	for (int i = 0; i < circle_array.count(); i++)
+	{
+		if (detect_collision(&circle_array[i], mousePosX, mousePosY))
+		{
+			circle_array[i].setHovering(true);
+		}
+
+		else
+		{
+			circle_array[i].setHovering(false);
+		}
+	}
+
+
 
 	generatePositionX(deltaTime);
 	generatePositionY(deltaTime);
