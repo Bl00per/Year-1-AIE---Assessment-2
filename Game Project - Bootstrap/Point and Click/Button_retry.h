@@ -13,7 +13,7 @@ public:
 	~Button_retry();
 
 	void draw(aie::Renderer2D* renderer);
-	bool update(bool a_bIsActive);
+	bool update();
 
 	bool buttonClickedRetry();
 
@@ -26,7 +26,5 @@ private:
 	float m_height = 76;
 
 	bool buttonHovered = false;
-
-	bool m_bIsActive = false;
 };
 

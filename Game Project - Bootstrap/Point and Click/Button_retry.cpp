@@ -15,37 +15,30 @@ Button_retry::~Button_retry()
 	delete m_retry;
 }
 
-bool Button_retry::update(bool a_bIsActive)
+bool Button_retry::update()
 {
 	aie::Input* input = aie::Input::getInstance();
 
-	m_bIsActive = a_bIsActive;
+	// Get mouse position
+	int mouseX = input->getMouseX();
+	int mouseY = input->getMouseY();
 
-	if (m_bIsActive == false)
-		return false;
-	else
+	// Calculate the 4 sides of the button
+	float left = m_posX - (m_width * 0.5f);
+	float right = m_posX + (m_width * 0.5f);
+	float bottom = m_posY - (m_height * 0.5f);
+	float top = m_posY + (m_height * 0.5f);
+
+	// Check if the mouse is inside the box made by the 4 sides
+	if (mouseX > left && mouseX < right && mouseY > bottom && mouseY < top)
 	{
-		// Get mouse position
-		int mouseX = input->getMouseX();
-		int mouseY = input->getMouseY();
-
-		// Calculate the 4 sides of the button
-		float left = m_posX - (m_width * 0.5f);
-		float right = m_posX + (m_width * 0.5f);
-		float bottom = m_posY - (m_height * 0.5f);
-		float top = m_posY + (m_height * 0.5f);
-
-		// Check if the mouse is inside the box made by the 4 sides
-		if (mouseX > left && mouseX < right && mouseY > bottom && mouseY < top)
-		{
-			// Return whether the mouse button is clicked while colliding
-			buttonHovered = true;
-			return input->wasMouseButtonReleased(aie::INPUT_MOUSE_BUTTON_LEFT);
-			//return input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT);
-		}
-		buttonHovered = false;
-		return false;
+		// Return whether the mouse button is clicked while colliding
+		buttonHovered = true;
+		return input->wasMouseButtonReleased(aie::INPUT_MOUSE_BUTTON_LEFT);
+		//return input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT);
 	}
+	buttonHovered = false;
+	return false;
 }
 
 void Button_retry::draw(aie::Renderer2D* renderer)
@@ -68,7 +61,7 @@ void Button_retry::draw(aie::Renderer2D* renderer)
 
 bool Button_retry::buttonClickedRetry()
 {
-	if (update(true))
+	if (update())
 	{
 		return true;
 	}

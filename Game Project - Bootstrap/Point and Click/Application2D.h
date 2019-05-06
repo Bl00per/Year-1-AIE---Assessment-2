@@ -6,7 +6,9 @@
 #include "Button.h"
 #include "dynamic_array.h"
 #include <Windows.h>
-#include <vector>
+//#include <vector>
+
+#define SMOL_DELAY 0.5f
 
 class Application2D : public aie::Application {
 public:
@@ -101,8 +103,6 @@ protected:
 	// Sprite stuff
 	int NumberHeartsLoss = 0;
 	int TotalHearts = 3;
-
-	bool waitingOnUser;
 
 	// Collision Detection
 	bool detect_collision(circle* a_circle, float a_mousePosX, float a_mousePosY);

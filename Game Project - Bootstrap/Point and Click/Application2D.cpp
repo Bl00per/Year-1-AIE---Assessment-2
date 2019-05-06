@@ -29,12 +29,11 @@ bool Application2D::startup()
 	m_buttonQuit = new Button_quit();
 
 	m_timer = 0;
-	end_timer = 0;
+	end_timer = SMOL_DELAY;
 
 	isButtonClicked_Play = false;
 	isButtonClicked_Retry = false;
 	isButtonClicked_Quit = false;
-	waitingOnUser = false;
 
 	srand(time(NULL));
 
@@ -78,16 +77,20 @@ void Application2D::update(float deltaTime)
 		isButtonClicked_Play = true;
 	}
 
-	if (m_buttonRetry->buttonClickedRetry())
+	// If only make the buttons usable once end timer has reached 0
+	if (end_timer <= 0)
 	{
-		isButtonClicked_Retry = true;
-		std::cout << "Retry button clicked" << std::endl;
-	}
+		if (m_buttonRetry->buttonClickedRetry())
+		{
+			isButtonClicked_Retry = true;
+			std::cout << "Retry button clicked" << std::endl;
+		}
 
-	if (m_buttonQuit->buttonClickedQuit())
-	{
-		isButtonClicked_Quit = true;
-		std::cout << "Quit button clicked" << std::endl;
+		if (m_buttonQuit->buttonClickedQuit())
+		{
+			isButtonClicked_Quit = true;
+			std::cout << "Quit button clicked" << std::endl;
+		}
 	}
 
 	// Check if Play button has been clicked
@@ -123,11 +126,6 @@ void Application2D::update(float deltaTime)
 					}
 				}
 			}
-
-			if (TotalHearts == 0)
-			{
-				retryButton.update(1);
-			}
 		}
 
 		// If the cursor is hovering a circle, make it cycle the colours
@@ -154,6 +152,11 @@ void Application2D::update(float deltaTime)
 			spawns_per_second += 0.04f;
 		}
 
+		if (TotalHearts <= 0)
+		{
+			end_timer -= deltaTime;
+		}
+
 		// Retry button
 		if (isButtonClicked_Retry && TotalHearts == 0)
 		{
@@ -162,8 +165,8 @@ void Application2D::update(float deltaTime)
 			spawns_per_second = 0.12f;
 			time_until_next_spawn = 3.0f;
 			circle_array.clear();
+			end_timer = SMOL_DELAY;
 			isButtonClicked_Retry = false;
-			waitingOnUser = false;
 		}
 
 		// Quit button
@@ -172,7 +175,7 @@ void Application2D::update(float deltaTime)
 			quit();
 		}
 
-		// exit the application
+		// Exit the application
 		if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		{
 			quit();
