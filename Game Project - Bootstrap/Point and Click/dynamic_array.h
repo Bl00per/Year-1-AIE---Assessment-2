@@ -158,7 +158,7 @@ public:
 		{
 			m_data[i] = m_data[i + a_count];
 		}
-		std::cout << "Object removed." << std::endl;
+		//std::cout << "Object removed." << std::endl;
 
 		m_count -= a_count;
 	}
