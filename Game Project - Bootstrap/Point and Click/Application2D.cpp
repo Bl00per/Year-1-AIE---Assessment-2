@@ -15,7 +15,7 @@ Application2D::~Application2D()
 bool Application2D::startup()
 {
 	m_2dRenderer = new aie::Renderer2D();
-	m_font = new aie::Font("./font/consolas_bold.ttf", 32);
+	m_font = new aie::Font("./bin/font/consolas_bold.ttf", 32);
 	m_health = new aie::Texture("./bin/textures/HeartSpritesheet.png");
 	m_gameoverLogo = new aie::Texture("./bin/textures/GameoverLogo.png");
 	m_buttonPlay = new Button_play();
