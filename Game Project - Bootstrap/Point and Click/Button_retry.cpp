@@ -4,7 +4,7 @@
 Button_retry::Button_retry()
 {
 	// Load a sprite to display as button
-	m_retry = new aie::Texture("../bin/textures/RetryButton.png");
+	m_retry = new aie::Texture("./bin/textures/RetryButton.png");
 }
 
 

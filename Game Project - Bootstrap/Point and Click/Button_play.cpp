@@ -4,7 +4,7 @@
 Button_play::Button_play()
 {
 	// Load a sprite to display as button
-	m_play = new aie::Texture("../bin/textures/PlayButton.png");
+	m_play = new aie::Texture("./bin/textures/PlayButton.png");
 }
 
 Button_play::~Button_play()

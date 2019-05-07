@@ -4,7 +4,7 @@
 Button_quit::Button_quit()
 {
 	// Load a sprite to display as button
-	m_quit = new aie::Texture("../bin/textures/QuitButton.png");
+	m_quit = new aie::Texture("./bin/textures/QuitButton.png");
 }
 
 
