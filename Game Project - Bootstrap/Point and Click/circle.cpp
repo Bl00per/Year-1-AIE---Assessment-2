@@ -1,6 +1,7 @@
 #include "circle.h"
 #include "Application2D.h"
 
+
 circle::circle(float m_circlePosX, float m_circlePosY)
 {
 	circlePosX = m_circlePosX;

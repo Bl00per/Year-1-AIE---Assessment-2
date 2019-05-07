@@ -3,10 +3,13 @@
 #include "Application.h"
 #include "Renderer2D.h"
 #include "circle.h"
-#include "Button.h"
 #include "dynamic_array.h"
+#include "Button_play.h"
+#include "Button_retry.h"
+#include "Button_quit.h"
 #include <Windows.h>
-//#include <vector>
+#include <iostream>
+#include <ctime>
 
 #define SMOL_DELAY 0.5f
 
@@ -29,6 +32,8 @@ public:
 
 	float getMousePosX();
 	float getMousePosY();
+
+	int getPlayerScore();
 
 	void updateHealth(int a_removeHeart, int a_removeTotalHearts);
 
@@ -72,15 +77,15 @@ public:
 protected:
 	aie::Renderer2D*	m_2dRenderer;
 	aie::Font*			m_font;
-	aie::Texture*		m_health;
-	aie::Texture*		m_gameoverLogo;
-	aie::Texture*		m_escape;
-	circle*				circleObject;
-	Button_play*		m_buttonPlay;
-	Button_retry*		m_buttonRetry;
-	Button_quit*		m_buttonQuit;
+	aie::Texture*		m_health; // Health sprite
+	aie::Texture*		m_gameoverLogo; // Gameover text
+	//aie::Texture*		m_escape; // Escape text
+	circle*				circleObject; // Circles
+	Button_play*		m_buttonPlay; // Play button
+	Button_retry*		m_buttonRetry; // Retry Button
+	Button_quit*		m_buttonQuit; // Quit button
 
-
+	// Check if the button has been clicked on
 	bool isButtonClicked_Play;
 	bool isButtonClicked_Retry;
 	bool isButtonClicked_Quit;
@@ -93,16 +98,20 @@ protected:
 	int objectPosX = 0;
 	int objectPosY = 0;
 
+	// Timers
 	float m_timer;
 	float end_timer;
+	float score_timer;
 
 	// Timer to increase circle spawn rate as the game progress
 	float time_until_next_spawn = 3.0f;
-	float spawns_per_second = 0.12f;
+	float spawns_per_second = 3.12f;
 
 	// Sprite stuff
 	int NumberHeartsLoss = 0;
 	int TotalHearts = 3;
+
+	int playerScore = 0;
 
 	// Collision Detection
 	bool detect_collision(circle* a_circle, float a_mousePosX, float a_mousePosY);

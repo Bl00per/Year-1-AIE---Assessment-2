@@ -1,7 +1,6 @@
 #include "Button_quit.h"
 
 
-
 Button_quit::Button_quit()
 {
 	// Load a sprite to display as button

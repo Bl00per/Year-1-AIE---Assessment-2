@@ -3,8 +3,6 @@
 #include "Renderer2D.h"
 #include "Input.h"
 #include "Texture.h"
-#include "Button.h"
-#include <windows.h>
 
 class Button_retry
 {

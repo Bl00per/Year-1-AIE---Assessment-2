@@ -1,7 +1,6 @@
 #include "Button_play.h"
 
 
-
 Button_play::Button_play()
 {
 	// Load a sprite to display as button

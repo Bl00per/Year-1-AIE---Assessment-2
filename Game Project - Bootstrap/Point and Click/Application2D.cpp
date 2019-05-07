@@ -2,34 +2,30 @@
 #include "Texture.h"
 #include "Font.h"
 #include "Input.h"
-#include <Windows.h>
-#include <iostream>
-#include <ctime>
+
 
 Application2D::Application2D()
 {
-
 }
 
 Application2D::~Application2D()
 {
-
 }
 
 bool Application2D::startup()
 {
 	m_2dRenderer = new aie::Renderer2D();
-
+	m_font = new aie::Font("./font/consolas_bold.ttf", 32);
 	m_health = new aie::Texture("../bin/textures/HeartSpritesheet.png");
 	m_gameoverLogo = new aie::Texture("../bin/textures/GameoverLogo.png");
-	m_escape = new aie::Texture("../bin/textures/QuitESC.png");
-	m_font = new aie::Font("./font/consolas_bold.ttf", 32);
+	//m_escape = new aie::Texture("../bin/textures/QuitESC.png");
 	m_buttonPlay = new Button_play();
 	m_buttonRetry = new Button_retry();
 	m_buttonQuit = new Button_quit();
 
 	m_timer = 0;
 	end_timer = SMOL_DELAY;
+	score_timer = 0;
 
 	isButtonClicked_Play = false;
 	isButtonClicked_Retry = false;
@@ -42,11 +38,11 @@ bool Application2D::startup()
 
 void Application2D::shutdown()
 {
-	delete m_font;
 	delete m_2dRenderer;
+	delete m_font;
 	delete m_health;
 	delete m_gameoverLogo;
-	delete m_escape;
+	//delete m_escape;
 	delete m_buttonPlay;
 	delete m_buttonRetry;
 	delete m_buttonQuit;
@@ -56,7 +52,6 @@ void Application2D::shutdown()
 void Application2D::update(float deltaTime)
 {
 	m_timer += deltaTime;
-	time_until_next_spawn -= deltaTime;
 
 	// input example
 	aie::Input* input = aie::Input::getInstance();
@@ -96,6 +91,20 @@ void Application2D::update(float deltaTime)
 	// Check if Play button has been clicked
 	if (isButtonClicked_Play)
 	{
+		// Timer starts when the play button has been clicked
+		time_until_next_spawn -= deltaTime;
+		if (TotalHearts > 0)
+		{
+			score_timer += deltaTime;
+		}
+
+		// Every 1/2 a second the player lasts, increase score by 1
+		if (score_timer > 0.5f)
+		{
+			playerScore += 1;
+			score_timer = 0;
+		}
+
 		// Call the update function while i < count
 		for (int i = 0; i < circle_array.count(); i++)
 		{
@@ -106,24 +115,28 @@ void Application2D::update(float deltaTime)
 		}
 
 		// While the player has hearts, keep playing
-		if (TotalHearts > 0)
+		if (TotalHearts > 0 && input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))
 		{
+			bool clickHit = false;
+
 			for (int i = 0; i < circle_array.count(); i++)
 			{
-				if (detect_collision(&circle_array[i], mousePosX, mousePosY) && input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))
+				if (detect_collision(&circle_array[i], mousePosX, mousePosY))
 				{
 					circle_array.remove(i);
+					playerScore += 10;
+					clickHit = true;
 				}
+			}
 
-				else if (!detect_collision(&circle_array[i], mousePosX, mousePosY) && input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))
+			if (!clickHit)
+			{
+				if (NumberHeartsLoss >= 3)
+					NumberHeartsLoss = 3; // Set sprite to display no hearts
+				else
 				{
-					if (NumberHeartsLoss >= 3)
-						NumberHeartsLoss = 3; // Set sprite to display no hearts
-					else
-					{
-						NumberHeartsLoss++; // Update sprite
-						TotalHearts--; // Update health
-					}
+					NumberHeartsLoss++; // Update sprite
+					TotalHearts--; // Update health
 				}
 			}
 		}
@@ -197,7 +210,7 @@ void Application2D::draw()
 	// Draw and Update heart spritesheet/health
 	//              			Across				Down	             Where across/Where down
 	m_2dRenderer->setUVRect(1.0f / 1.0f, (float)NumberHeartsLoss / 4.0f, 1.0f / 1.0f, 1.0 / 4.0f);
-	m_2dRenderer->drawSprite(m_health, 1063, 60, 418, 103, 0, 0.9);
+	m_2dRenderer->drawSprite(m_health, 1115, 47, 314, 77, 0, 0.9);
 
 	// Every time a circle is pushed in circle::update, draw a circle to the screen
 	for (int i = 0; i < circle_array.count(); i++)
@@ -229,9 +242,9 @@ void Application2D::draw()
 
 	// output some text
 	m_2dRenderer->setRenderColour(1.0f, 1.0f, 1.0f, 1.0f);
-	char fps[32];
-	sprintf_s(fps, 32, "FPS: %i", getFPS());
-	m_2dRenderer->drawText(m_font, fps, 0, 720 - 32);
+	char score[32];
+	sprintf_s(score, 32, "Score: %i", getPlayerScore());
+	m_2dRenderer->drawText(m_font, score, 2, 720 - 32);
 
 	// done drawing sprites
 	m_2dRenderer->end();
@@ -277,11 +290,16 @@ bool Application2D::detect_collision(circle* a_circle, float a_mousePosX, float 
 void Application2D::generatePositionX(float deltaTime)
 {
 	// Get a random X position to spawn the circles
-	objectPosX = rand() % 1280 + 0;
+	objectPosX = rand() % 1260 + 10;
 }
 
 void Application2D::generatePositionY(float deltaTime)
 {
 	// Get a random Y position to spawn the circles
-	objectPosY = rand() % 720 + 0;
+	objectPosY = rand() % 700 + 10;
+}
+
+int Application2D::getPlayerScore()
+{
+	return playerScore/* += (int)score_timer*/;
 }

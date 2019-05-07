@@ -23,6 +23,7 @@ public:
 	float GetPosX() const { return circlePosX; }
 	float GetPosY() const { return circlePosY; }
 
+	// Pass in a check to see if the cursor is hovering over a circle
 	void setHovering(bool a_is_hovering);
 
 

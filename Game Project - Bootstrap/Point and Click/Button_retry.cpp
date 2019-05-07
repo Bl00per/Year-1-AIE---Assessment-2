@@ -1,6 +1,4 @@
 #include "Button_retry.h"
-#include "Button.h"
-
 
 
 Button_retry::Button_retry()

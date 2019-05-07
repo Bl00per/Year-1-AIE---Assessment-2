@@ -3,7 +3,6 @@
 #include "Renderer2D.h"
 #include "Input.h"
 #include "Texture.h"
-#include "Button.h"
 
 class Button_quit
 {
