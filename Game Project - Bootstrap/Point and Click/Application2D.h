@@ -34,6 +34,9 @@ public:
 	float getMousePosY();
 
 	int getPlayerScore();
+	int getTimeSurvivedSEC();
+	int getTimeSurvivedMIN();
+
 
 	void updateHealth(int a_removeHeart, int a_removeTotalHearts);
 
@@ -102,16 +105,22 @@ protected:
 	float m_timer;
 	float end_timer;
 	float score_timer;
+	float survive_timer;
 
 	// Timer to increase circle spawn rate as the game progress
 	float time_until_next_spawn = 3.0f;
-	float spawns_per_second = 3.12f;
+	float spawns_per_second = 0.12f;
 
 	// Sprite stuff
 	int NumberHeartsLoss = 0;
 	int TotalHearts = 3;
 
+	// Score system
 	int playerScore = 0;
+
+	// Ending spawn time
+	int timeSurvivedSEC = 0;
+	int timeSurvivedMIN = 0;
 
 	// Collision Detection
 	bool detect_collision(circle* a_circle, float a_mousePosX, float a_mousePosY);

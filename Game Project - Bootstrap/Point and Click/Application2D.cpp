@@ -26,6 +26,7 @@ bool Application2D::startup()
 	m_timer = 0;
 	end_timer = SMOL_DELAY;
 	score_timer = 0;
+	survive_timer = 0;
 
 	isButtonClicked_Play = false;
 	isButtonClicked_Retry = false;
@@ -96,6 +97,7 @@ void Application2D::update(float deltaTime)
 		if (TotalHearts > 0)
 		{
 			score_timer += deltaTime;
+			survive_timer += deltaTime;
 		}
 
 		// Every 1/2 a second the player lasts, increase score by 1
@@ -103,6 +105,18 @@ void Application2D::update(float deltaTime)
 		{
 			playerScore += 1;
 			score_timer = 0;
+		}
+
+		if (survive_timer >= 1.0)
+		{
+			timeSurvivedSEC += 1;
+			survive_timer = 0;
+
+			if (timeSurvivedSEC == 60)
+			{
+				timeSurvivedMIN += 1;
+				timeSurvivedSEC = 0;
+			}
 		}
 
 		// Call the update function while i < count
@@ -177,6 +191,9 @@ void Application2D::update(float deltaTime)
 			TotalHearts = 3;
 			spawns_per_second = 0.12f;
 			time_until_next_spawn = 3.0f;
+			timeSurvivedMIN = 0;
+			timeSurvivedSEC = 0;
+			playerScore = 0;
 			circle_array.clear();
 			end_timer = SMOL_DELAY;
 			isButtonClicked_Retry = false;
@@ -187,12 +204,11 @@ void Application2D::update(float deltaTime)
 		{
 			quit();
 		}
-
-		// Exit the application
-		if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
-		{
-			quit();
-		}
+	}
+	// Exit the application
+	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
+	{
+		quit();
 	}
 }
 
@@ -218,6 +234,7 @@ void Application2D::draw()
 		circle_array[i].draw(m_2dRenderer);
 	}
 
+	char endtime[32];
 	// If the player has run out of hearts, display the gameover screen
 	if (TotalHearts <= 0)
 	{
@@ -232,6 +249,16 @@ void Application2D::draw()
 
 		// Retry button sprite
 		m_buttonRetry->draw(m_2dRenderer);
+
+		if (timeSurvivedSEC < 10)
+		{
+			sprintf_s(endtime, 32, "Time Survived: %i:0%i", getTimeSurvivedMIN(), getTimeSurvivedSEC());
+		}
+		else
+		{
+			sprintf_s(endtime, 32, "Time Survived: %i:%i", getTimeSurvivedMIN(), getTimeSurvivedSEC());
+		}
+		m_2dRenderer->drawText(m_font, endtime, 480, 160);
 	}
 
 	// Draw button
@@ -242,6 +269,7 @@ void Application2D::draw()
 
 	// output some text
 	m_2dRenderer->setRenderColour(1.0f, 1.0f, 1.0f, 1.0f);
+
 	char score[32];
 	sprintf_s(score, 32, "Score: %i", getPlayerScore());
 	m_2dRenderer->drawText(m_font, score, 2, 720 - 32);
@@ -301,5 +329,15 @@ void Application2D::generatePositionY(float deltaTime)
 
 int Application2D::getPlayerScore()
 {
-	return playerScore/* += (int)score_timer*/;
+	return playerScore;
+}
+
+int Application2D::getTimeSurvivedSEC()
+{
+	return timeSurvivedSEC;
+}
+
+int Application2D::getTimeSurvivedMIN()
+{
+	return timeSurvivedMIN;
 }
