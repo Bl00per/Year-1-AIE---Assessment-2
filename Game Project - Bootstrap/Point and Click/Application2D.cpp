@@ -18,7 +18,6 @@ bool Application2D::startup()
 	m_font = new aie::Font("./font/consolas_bold.ttf", 32);
 	m_health = new aie::Texture("../bin/textures/HeartSpritesheet.png");
 	m_gameoverLogo = new aie::Texture("../bin/textures/GameoverLogo.png");
-	//m_escape = new aie::Texture("../bin/textures/QuitESC.png");
 	m_buttonPlay = new Button_play();
 	m_buttonRetry = new Button_retry();
 	m_buttonQuit = new Button_quit();
@@ -43,7 +42,6 @@ void Application2D::shutdown()
 	delete m_font;
 	delete m_health;
 	delete m_gameoverLogo;
-	//delete m_escape;
 	delete m_buttonPlay;
 	delete m_buttonRetry;
 	delete m_buttonQuit;
@@ -73,19 +71,17 @@ void Application2D::update(float deltaTime)
 		isButtonClicked_Play = true;
 	}
 
-	// If only make the buttons usable once end timer has reached 0
+	// Only make the buttons usable once end timer has reached 0
 	if (end_timer <= 0)
 	{
 		if (m_buttonRetry->buttonClickedRetry())
 		{
 			isButtonClicked_Retry = true;
-			std::cout << "Retry button clicked" << std::endl;
 		}
 
 		if (m_buttonQuit->buttonClickedQuit())
 		{
 			isButtonClicked_Quit = true;
-			std::cout << "Quit button clicked" << std::endl;
 		}
 	}
 
@@ -107,6 +103,7 @@ void Application2D::update(float deltaTime)
 			score_timer = 0;
 		}
 
+		// Track the time survived
 		if (survive_timer >= 1.0)
 		{
 			timeSurvivedSEC += 1;
@@ -175,7 +172,7 @@ void Application2D::update(float deltaTime)
 			circle_array.push(circle(objectPosX, objectPosY));
 
 			time_until_next_spawn = 1 / spawns_per_second;
-			std::cout << "Tick at: " << spawns_per_second << std::endl;
+			//std::cout << "Tick at: " << spawns_per_second << std::endl;
 			spawns_per_second += 0.04f;
 		}
 
@@ -258,7 +255,7 @@ void Application2D::draw()
 		{
 			sprintf_s(endtime, 32, "Time Survived: %i:%i", getTimeSurvivedMIN(), getTimeSurvivedSEC());
 		}
-		m_2dRenderer->drawText(m_font, endtime, 480, 160);
+		m_2dRenderer->drawText(m_font, endtime, 475, 160);
 	}
 
 	// Draw button
@@ -315,15 +312,15 @@ bool Application2D::detect_collision(circle* a_circle, float a_mousePosX, float 
 	return false;
 }
 
+// Get a random X position to spawn the circles
 void Application2D::generatePositionX(float deltaTime)
 {
-	// Get a random X position to spawn the circles
 	objectPosX = rand() % 1260 + 10;
 }
 
+// Get a random Y position to spawn the circles
 void Application2D::generatePositionY(float deltaTime)
 {
-	// Get a random Y position to spawn the circles
 	objectPosY = rand() % 700 + 10;
 }
 

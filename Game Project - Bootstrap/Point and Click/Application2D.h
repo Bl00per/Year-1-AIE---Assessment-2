@@ -82,7 +82,6 @@ protected:
 	aie::Font*			m_font;
 	aie::Texture*		m_health; // Health sprite
 	aie::Texture*		m_gameoverLogo; // Gameover text
-	//aie::Texture*		m_escape; // Escape text
 	circle*				circleObject; // Circles
 	Button_play*		m_buttonPlay; // Play button
 	Button_retry*		m_buttonRetry; // Retry Button
